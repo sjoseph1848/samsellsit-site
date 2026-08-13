@@ -27,6 +27,27 @@ const CONFIG = {
 Change those four values and nothing else. Set `YOUTUBE` to `""` to hide the
 YouTube link entirely.
 
+## Where a submission goes
+
+1. The visitor submits. The browser POSTs to **Netlify Forms**, which stores it.
+   This happens server side, so the lead is captured whether or not they do
+   anything else.
+2. Netlify emails **sam@samsellsit.com**.
+3. `netlify/functions/submission-created.js` fires automatically and sends a
+   push notification to Sam's phone via **ntfy.sh**. Tapping it dials the lead.
+4. The visitor sees a confirmation screen with an optional "text me now" button
+   for a faster reply.
+
+### The ntfy topic is a secret
+
+Anyone who knows the topic name can read every lead that comes through it.
+It is stored as the `NTFY_TOPIC` environment variable in
+**Netlify > Site configuration > Environment variables**, never in this repo,
+because this repo is public.
+
+To rotate it: pick a new random topic, update the env var, redeploy, and
+re-subscribe in the ntfy app.
+
 ## Publishing a change
 
 ```bash

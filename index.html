@@ -229,6 +229,14 @@ textarea{resize:vertical;min-height:92px}
 .alt:hover{border-color:var(--ink-navy)}
 .alt:focus-visible{outline:3px solid var(--antique-gold);outline-offset:2px}
 
+.go:disabled{opacity:.55;cursor:default;transform:none}
+.golink,.altlink{display:block;text-align:center;text-decoration:none;box-sizing:border-box}
+.golink{line-height:26px}
+.altlink{line-height:22px}
+.donewrap{text-align:center;padding:6px 0 4px}
+.donewrap .psub{margin-bottom:24px}
+.donemark{width:64px;height:64px;margin:0 auto 18px;border-radius:50%;
+  background:var(--ink-navy);display:flex;align-items:center;justify-content:center}
 .fine{font-size:.88rem;color:var(--muted-ink);text-align:center;margin-top:16px;line-height:1.5}
 .fine strong{color:var(--ink-navy);font-weight:700}
 .sent{color:var(--ink-navy);font-weight:700}
@@ -365,7 +373,12 @@ textarea{resize:vertical;min-height:92px}
     <h2 class="phead">Let us find your place.</h2>
     <p class="psub">Four questions. I text you real options, with every fee included, not just the base rent.</p>
 
-    <form onsubmit="return send(event,'rent')">
+    <form name="renter-lead" method="POST" data-netlify="true"
+          data-netlify-honeypot="bot-field" onsubmit="return send(event,'rent')">
+      <input type="hidden" name="form-name" value="renter-lead">
+      <p hidden><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <input type="hidden" name="beds" id="r-beds-val">
+
       <div class="f">
         <label for="r-move">When do you need to move in?</label>
         <select id="r-move" name="move" required>
@@ -417,8 +430,7 @@ textarea{resize:vertical;min-height:92px}
         <div class="f"><label for="r-phone">Your number</label><input id="r-phone" name="phone" type="tel" inputmode="tel" placeholder="(512) 555 0123" required></div>
       </div>
 
-      <button type="submit" class="go">Send this to Sam</button>
-      <button type="button" class="alt" onclick="send(null,'rent','email')">Email it instead</button>
+      <button type="submit" class="go" data-go="rent">Send this to Sam</button>
       <p class="fine" data-slot="rent"><strong>This costs you nothing.</strong> The property pays the referral fee. Your rent is the same whether you use me or walk in cold.</p>
     </form>
   </div>
@@ -429,7 +441,12 @@ textarea{resize:vertical;min-height:92px}
     <h2 class="phead">Let us run your numbers.</h2>
     <p class="psub">No lender call. No pressure. I tell you honestly whether buying beats renting for you right now, including when the answer is no.</p>
 
-    <form onsubmit="return send(event,'buy')">
+    <form name="buyer-lead" method="POST" data-netlify="true"
+          data-netlify-honeypot="bot-field" onsubmit="return send(event,'buy')">
+      <input type="hidden" name="form-name" value="buyer-lead">
+      <p hidden><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <input type="hidden" name="first" id="b-first-val">
+
       <div class="f">
         <label for="b-stage">Where are you in the process?</label>
         <select id="b-stage" name="stage" required>
@@ -484,10 +501,26 @@ textarea{resize:vertical;min-height:92px}
         <div class="f"><label for="b-phone">Your number</label><input id="b-phone" name="phone" type="tel" inputmode="tel" placeholder="(512) 555 0123" required></div>
       </div>
 
-      <button type="submit" class="go">Send this to Sam</button>
-      <button type="button" class="alt" onclick="send(null,'buy','email')">Email it instead</button>
+      <button type="submit" class="go" data-go="buy">Send this to Sam</button>
       <p class="fine" data-slot="buy"><strong>Free, and you get the straight answer.</strong> If renting is the better move for you right now, I will say so.</p>
     </form>
+  </div>
+
+  <!-- ============ SUCCESS ============ -->
+  <div id="done" class="panel">
+    <div class="donewrap">
+      <div class="donemark" aria-hidden="true">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"
+             stroke="#b88a2b" stroke-width="2.4" stroke-linecap="square">
+          <path d="M4 12.5l5.2 5.2L20 7"/>
+        </svg>
+      </div>
+      <h2 class="phead">Got it.</h2>
+      <p class="psub" id="donemsg">Your answers are with me. I usually reply within the hour, and always the same day.</p>
+      <a id="donetext" class="go golink" href="#">Text me now for a faster reply</a>
+      <a id="doneig" class="alt altlink" href="#" target="_blank" rel="noopener">See the apartments on Instagram</a>
+      <p class="fine">Nothing to pay, ever. The property pays the referral fee.</p>
+    </div>
   </div>
 
   <!-- ============ FOOTER ============ -->
@@ -557,7 +590,7 @@ if (CONFIG.YOUTUBE === "https://youtube.com/@samsellsit") {
 /* ---------- panel routing ---------- */
 function go(which){
   document.getElementById('pick').style.display = which ? 'none' : 'block';
-  ['rent','buy'].forEach(function(id){
+  ['rent','buy','done'].forEach(function(id){
     document.getElementById(id).classList.toggle('on', id === which);
   });
   fitHeadlines();                      /* panels are hidden until now, so measure on open */
@@ -566,13 +599,19 @@ function go(which){
   if(which){ var h = document.querySelector('#'+which+' .phead'); if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); } }
 }
 
-/* ---------- chips (mouse + keyboard) ---------- */
+/* ---------- chips (mouse + keyboard) ----------
+   Chips are divs, so they carry no form value of their own. Each group mirrors
+   its selection into a hidden input so the real POST captures it. */
 document.querySelectorAll('.chips').forEach(function(group){
+  var mirror = document.getElementById(
+    (group.closest('#rent') ? 'r-beds-val' : 'b-first-val')
+  );
   function pick(el){
     group.querySelectorAll('.chip').forEach(function(c){
       c.classList.remove('sel'); c.setAttribute('aria-pressed','false');
     });
     el.classList.add('sel'); el.setAttribute('aria-pressed','true');
+    if(mirror) mirror.value = el.textContent.trim();
   }
   group.querySelectorAll('.chip').forEach(function(c){
     c.setAttribute('aria-pressed','false');
@@ -596,6 +635,7 @@ function collect(kind){
   var panel = document.getElementById(kind);
   function v(n){ var f = panel.querySelector('[name="'+n+'"]'); return f ? f.value.trim() : ''; }
   function chip(n){ var s = panel.querySelector('.chips[data-name="'+n+'"] .sel'); return s ? s.textContent.trim() : ''; }
+  if(kind === 'done') return '';
 
   var L = [];
   if(kind === 'rent'){
@@ -621,42 +661,66 @@ function collect(kind){
   return L.join("\n");
 }
 
-/* ---------- send ---------- */
-function send(ev, kind, mode){
+/* ---------- send ----------
+   The submission is POSTed to Netlify Forms, which stores it, emails Sam, and
+   triggers the push function. Capture happens server side, so a lead is never
+   lost because someone closed their messages app. The direct text is offered
+   afterwards as an accelerator, not as the delivery mechanism. */
+function send(ev, kind){
   if(ev) ev.preventDefault();
-  var form = document.getElementById(kind).querySelector('form');
+
+  var panel = document.getElementById(kind);
+  var form  = panel.querySelector('form');
   if(!form.reportValidity()) return false;
 
-  var body = collect(kind);
-  var subj = kind === 'rent' ? 'New renter lead from your website'
-                             : 'New buyer lead from your website';
+  var btn = panel.querySelector('.go');
+  btn.disabled = true;
+  var label = btn.textContent;
+  btn.textContent = 'Sending...';
 
-  if(mode === 'email'){
-    location.href = 'mailto:' + CONFIG.EMAIL
-      + '?subject=' + encodeURIComponent(subj)
-      + '&body='   + encodeURIComponent(body);
-    thanks(kind); return false;
-  }
+  var payload = new URLSearchParams(new FormData(form)).toString();
 
-  var iOS = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
-  location.href = 'sms:+' + CONFIG.PHONE + (iOS ? '&' : '?') + 'body=' + encodeURIComponent(body);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: payload
+  })
+  .then(function(r){
+    if(!r.ok) throw new Error('status ' + r.status);
+    succeed(kind);
+  })
+  .catch(function(){
+    /* Network died or Netlify is unreachable. Do not swallow the lead:
+       hand them straight to the text message so it still gets through. */
+    btn.disabled = false;
+    btn.textContent = label;
+    toast('Connection problem. Opening a text instead.');
+    textFallback(kind);
+  });
 
-  setTimeout(function(){
-    if(document.hidden) return;
-    if(navigator.clipboard){
-      navigator.clipboard.writeText(body)
-        .then(function(){ toast('Copied. Paste it in a text to Sam.'); })
-        .catch(function(){});
-    }
-  }, 900);
-
-  thanks(kind); return false;
+  return false;
 }
 
-function thanks(kind){
-  var p = document.querySelector('.fine[data-slot="'+kind+'"]');
-  if(p) p.innerHTML = '<span class="sent">Sent. If your messages app did not open, '
-    + 'your answers were copied. Just paste them to Sam.</span>';
+/* Success screen, with a one tap text option for the impatient. */
+function succeed(kind){
+  var body = collect(kind);
+  var iOS  = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+
+  var t = document.getElementById('donetext');
+  t.href = 'sms:+' + CONFIG.PHONE + (iOS ? '&' : '?') + 'body=' + encodeURIComponent(body);
+  document.getElementById('doneig').href = 'https://instagram.com/' + CONFIG.IG;
+
+  document.getElementById('donemsg').textContent = kind === 'rent'
+    ? 'Your answers are with me. I will send you real options, with every fee included. Usually within the hour.'
+    : 'Your answers are with me. I will run your numbers and tell you straight whether buying beats renting right now.';
+
+  go('done');
+}
+
+function textFallback(kind){
+  var body = collect(kind);
+  var iOS  = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+  location.href = 'sms:+' + CONFIG.PHONE + (iOS ? '&' : '?') + 'body=' + encodeURIComponent(body);
 }
 
 if(location.hash === '#rent' || location.hash === '#buy') go(location.hash.slice(1));
