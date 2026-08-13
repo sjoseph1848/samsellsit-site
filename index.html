@@ -274,6 +274,15 @@ textarea{resize:vertical;min-height:92px}
 .warn b{color:var(--rust);font-family:var(--font-heading);font-weight:800;
   letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:3px}
 
+/* ---------- bind form submits ----------
+   Deliberately not an inline onsubmit attribute: Netlify's form-detection build
+   step re-serializes form tags with single quotes, which corrupts any inline
+   handler containing quotes and silently falls back to a native POST. */
+['rent','buy'].forEach(function(kind){
+  var f = document.querySelector('#' + kind + ' form');
+  if(f) f.addEventListener('submit', function(e){ send(e, kind); });
+});
+
 /* ---------- toast ---------- */
 .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,200px);
   background:var(--ink-navy);color:var(--paper-cream);
@@ -374,7 +383,7 @@ textarea{resize:vertical;min-height:92px}
     <p class="psub">Four questions. I text you real options, with every fee included, not just the base rent.</p>
 
     <form name="renter-lead" method="POST" data-netlify="true"
-          data-netlify-honeypot="bot-field" onsubmit="return send(event,'rent')">
+          data-netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="renter-lead">
       <p hidden><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <input type="hidden" name="beds" id="r-beds-val">
@@ -442,7 +451,7 @@ textarea{resize:vertical;min-height:92px}
     <p class="psub">No lender call. No pressure. I tell you honestly whether buying beats renting for you right now, including when the answer is no.</p>
 
     <form name="buyer-lead" method="POST" data-netlify="true"
-          data-netlify-honeypot="bot-field" onsubmit="return send(event,'buy')">
+          data-netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="buyer-lead">
       <p hidden><label>Leave this empty: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <input type="hidden" name="first" id="b-first-val">
@@ -620,6 +629,15 @@ document.querySelectorAll('.chips').forEach(function(group){
       if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(c); }
     });
   });
+});
+
+/* ---------- bind form submits ----------
+   Deliberately not an inline onsubmit attribute: Netlify's form-detection build
+   step re-serializes form tags with single quotes, which corrupts any inline
+   handler containing quotes and silently falls back to a native POST. */
+['rent','buy'].forEach(function(kind){
+  var f = document.querySelector('#' + kind + ' form');
+  if(f) f.addEventListener('submit', function(e){ send(e, kind); });
 });
 
 /* ---------- toast ---------- */
