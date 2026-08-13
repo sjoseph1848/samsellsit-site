@@ -1,0 +1,87 @@
+GITHUB  ->  NETLIFY
+===================
+
+Two commands total. Then the site updates itself forever.
+
+
+FIRST, A 60-SECOND WARNING
+--------------------------
+You already ran `npx vercel --prod` in this folder, but you were NOT logged in,
+so Vercel made an ANONYMOUS deployment. Anonymous deployments are temporary.
+There is a claim link in .vercel/anonymous.json that expires about 78 minutes
+after you ran it.
+
+You do not need to do anything about it. We are moving to Netlify, and the
+Vercel folder has been moved to _to_delete/ so it stays out of your repo.
+It contained an access token, which must never end up on public GitHub.
+The .gitignore now blocks .vercel/ and .netlify/ regardless.
+
+If you DO want to keep the Vercel deployment instead, open
+_to_delete/.vercel/anonymous.json, find "claimUrl", and open it in a browser
+before it expires. Otherwise ignore all of this.
+
+
+STEP 1 — PUSH TO GITHUB
+-----------------------
+Open Terminal. Paste this whole line:
+
+   cd ~/Desktop/"Design System"/samsellsit-site && ./setup.sh
+
+The script checks for the GitHub CLI, logs you in if needed, creates the repo
+under your account (sjoseph1848), and pushes.
+
+If it says "gh not found", install it first:
+
+   brew install gh
+
+then run the setup line again.
+
+
+STEP 2 — CONNECT NETLIFY
+------------------------
+1. Go to  https://app.netlify.com/start
+2. Click  "Import from Git"  ->  GitHub
+3. Authorize Netlify, then choose  samsellsit-site
+4. Build command:      LEAVE EMPTY
+   Publish directory:  .
+5. Deploy
+
+You get a URL like https://samsellsit.netlify.app
+Rename it under Site configuration -> Change site name.
+
+
+THAT IS IT. FROM NOW ON
+-----------------------
+Any change, yours or mine, goes live with one command:
+
+   cd ~/Desktop/"Design System"/samsellsit-site && ./push.sh "what changed"
+
+Netlify sees the push and rebuilds in about 30 seconds. No dragging files,
+no re-uploading, no logging into anything.
+
+When I update the page for you, I write it straight into this folder. You run
+push.sh and it is live.
+
+
+YOUR LINKS ONCE IT IS UP
+------------------------
+   yoursite.netlify.app          the two-button chooser
+   yoursite.netlify.app/rent     straight to the renter form
+   yoursite.netlify.app/buy      straight to the buyer form
+
+Use /buy in your bio the week you post a rent-vs-own video.
+
+
+LATER: YOUR OWN DOMAIN
+----------------------
+In Netlify: Domain management -> Add a domain -> start.samsellsit.com
+Netlify tells you the one DNS record to add. Free SSL, about 10 minutes.
+Worth doing. Your whole positioning is credibility, and a branded link
+carries more of it than a netlify.app subdomain.
+
+
+CHANGING YOUR OWN INFO
+----------------------
+Open index.html in any text editor. The CONFIG block is at the very top:
+phone, email, Instagram handle, YouTube URL. Change those, save, run push.sh.
+Set YOUTUBE to "" to hide the YouTube link.

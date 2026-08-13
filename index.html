@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sam Joseph · Austin Apartments &amp; First Homes</title>
+<meta name="description" content="The real price, not the ad price. Free Austin apartment locating and first home buyer guidance.">
+<meta name="theme-color" content="#f3e9d2">
+<meta property="og:title" content="Austin Apartments &amp; First Homes. Sam Joseph.">
+<meta property="og:description" content="The real price, not the ad price. I find your Austin apartment. It costs you nothing.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230c325f'/><text x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='700' fill='%23b88a2b' text-anchor='middle'>SJ</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,600&family=League+Gothic&family=Libre+Baskerville:ital@0;1&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+/* ============ EDIT THIS BLOCK ============
+   1. PHONE    your mobile, digits only, with the 1 in front
+   2. EMAIL    where the fallback email goes
+   3. IG       Instagram handle, no @
+   4. YOUTUBE  full channel URL, or "" to hide the link
+   Nothing else in this file needs to change.          */
+const CONFIG = {
+  PHONE:   "17372777519",     /* Sam's mobile, 737 277 7519 */
+  EMAIL:   "sam@samsellsit.com",
+  IG:      "samsellsit512",
+  YOUTUBE: "https://www.youtube.com/@SamJosephAustinApartmentFinder"
+};
+/* ============ END EDIT BLOCK ============ */
+</script>
+
+<style>
+:root{
+  color-scheme: light;
+
+  --ink-navy:#0c325f;
+  --ink-navy-deep:#082746;
+  --paper-cream:#f3e9d2;
+  --paper-light:#fbf5e8;
+  --paper-aged:#e4d6b6;
+  --antique-gold:#b88a2b;
+  --gold-light:#d0ae5a;
+  --rust:#a9471b;
+  --muted-ink:#596368;
+  --line-soft:#c9b98f;
+
+  --font-display:"League Gothic","Oswald","Barlow Condensed","Arial Narrow","Helvetica Neue Condensed",sans-serif;
+  --font-heading:"Barlow Condensed","Roboto Condensed","Arial Narrow",sans-serif;
+  --font-body:"Source Sans 3",Arial,sans-serif;
+  --font-serif:"Libre Baskerville",Georgia,serif;
+
+  --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
+  --space-5:1.5rem; --space-6:2rem; --space-7:3rem;
+
+  --radius-print:2px;
+  --border-fine:1px;
+  --border-strong:2px;
+  --motion-fast:160ms;
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  color:var(--ink-navy-deep);
+  background-color:var(--paper-cream);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(12,50,95,.035) 0 1px, transparent 1.4px),
+    radial-gradient(circle at 70% 65%, rgba(184,138,43,.04) 0 1px, transparent 1.5px),
+    linear-gradient(rgba(255,255,255,.16), rgba(228,214,182,.08));
+  background-size:19px 23px, 29px 31px, 100% 100%;
+  font-family:var(--font-body);
+  font-size:1.05rem;
+  line-height:1.55;
+  min-height:100svh;
+  padding:max(18px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom));
+}
+.frame{
+  max-width:560px;margin:0 auto;
+  border:var(--border-strong) solid var(--ink-navy);
+  background:rgba(251,245,232,.42);
+  padding:clamp(18px,5vw,30px) clamp(16px,5vw,32px) clamp(22px,5vw,30px);
+}
+
+/* ---------- masthead ---------- */
+.mast{text-align:center;border-bottom:var(--border-fine) solid var(--line-soft);padding-bottom:14px}
+.mast .eyebrow{
+  font-family:var(--font-heading);font-weight:700;font-size:.8rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted-ink);margin:0}
+.mast .rule{height:2px;background:var(--antique-gold);margin:10px auto;width:52px}
+.mast h1{
+  font-family:var(--font-display);
+  font-size:clamp(2.2rem,10vw,4.2rem);
+  line-height:.88;letter-spacing:-.005em;text-transform:uppercase;
+  color:var(--ink-navy);margin:6px 0 0}
+.mast h1 .ln1,.mast h1 .ln2{display:block;white-space:nowrap}
+.mast h1 .ln2{position:relative}
+.mast h1 .ln2::after{content:"";display:block;height:3px;background:var(--antique-gold);
+  width:58%;margin:9px auto 0}
+.mast .lede{
+  font-family:var(--font-serif);font-style:italic;
+  font-size:.98rem;line-height:1.5;color:var(--muted-ink);
+  margin:14px auto 0;max-width:34ch}
+.mast .who{
+  font-family:var(--font-heading);font-weight:700;font-size:.85rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-navy);margin:12px 0 0}
+.mast .who span{color:var(--muted-ink);font-weight:600}
+
+/* ---------- rule + star divider ---------- */
+.divider{display:flex;align-items:center;gap:12px;margin:22px 0 18px}
+.divider .ln{flex:1;height:1px;background:var(--antique-gold)}
+.divider svg{flex:0 0 auto;display:block}
+
+.q{
+  font-family:var(--font-heading);font-weight:700;font-size:1.05rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-navy);
+  text-align:center;margin:0 0 14px}
+
+/* ---------- choice blocks ---------- */
+.choices{display:grid;gap:14px}
+.big{
+  display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;cursor:pointer;
+  background:var(--paper-light);
+  border:var(--border-strong) solid var(--ink-navy);
+  border-left-width:7px;
+  border-radius:var(--radius-print);
+  padding:16px 16px;
+  color:var(--ink-navy-deep);font-family:var(--font-body);font-size:1rem;
+  transition:transform var(--motion-fast) ease, background var(--motion-fast) ease;
+  min-height:44px}
+.big.rent{border-left-color:var(--ink-navy)}
+.big.buy{border-left-color:var(--antique-gold)}
+.big:hover{background:var(--paper-aged);transform:translateY(-2px)}
+.big:active{transform:translateY(0)}
+.big:focus-visible{outline:3px solid var(--antique-gold);outline-offset:3px}
+.ico{flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--ink-navy);
+  display:flex;align-items:center;justify-content:center}
+.big .tx{flex:1;min-width:0}
+.big .t{
+  font-family:var(--font-heading);font-weight:800;
+  font-size:1.32rem;letter-spacing:.03em;text-transform:uppercase;
+  color:var(--ink-navy);line-height:1.1;margin-bottom:4px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px}
+.big .t .arw{color:var(--antique-gold);font-size:1.1rem;transition:transform var(--motion-fast) ease}
+.big:hover .t .arw{transform:translateX(3px)}
+.big .d{font-size:.92rem;line-height:1.45;color:var(--muted-ink)}
+
+.note{font-size:.85rem;color:var(--muted-ink);text-align:center;margin:14px 0 0}
+
+/* ---------- panels ---------- */
+.panel{display:none}
+.panel.on{display:block}
+.back{
+  background:none;border:none;padding:6px 0;cursor:pointer;
+  font-family:var(--font-heading);font-weight:700;font-size:.85rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted-ink);
+  display:inline-flex;align-items:center;gap:7px;margin-bottom:6px;min-height:44px}
+.back:hover{color:var(--ink-navy)}
+.back:focus-visible{outline:3px solid var(--antique-gold);outline-offset:2px}
+.phead{
+  font-family:var(--font-display);
+  font-size:clamp(2.3rem,9vw,3.2rem);line-height:.9;text-transform:uppercase;
+  color:var(--ink-navy);margin:2px 0 8px;letter-spacing:-.005em}
+.psub{font-size:.98rem;color:var(--muted-ink);margin:0 0 22px;line-height:1.5}
+
+/* ---------- form ---------- */
+.f{margin-bottom:17px}
+label{
+  display:block;font-family:var(--font-heading);font-weight:700;
+  font-size:.82rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-navy);margin-bottom:7px}
+label .opt{color:var(--muted-ink);font-weight:600;letter-spacing:.05em}
+input,select,textarea{
+  width:100%;background:var(--paper-light);
+  border:var(--border-fine) solid var(--ink-navy);
+  border-radius:var(--radius-print);
+  padding:13px 14px;color:var(--ink-navy-deep);
+  font-family:var(--font-body);font-size:16px;line-height:1.5;
+  transition:border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
+  -webkit-appearance:none;appearance:none;min-height:48px}
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--antique-gold);
+  box-shadow:inset 0 0 0 1px var(--antique-gold)}
+input::placeholder,textarea::placeholder{color:var(--muted-ink);opacity:.85}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' viewBox='0 0 13 9'%3E%3Cpath fill='none' stroke='%230c325f' stroke-width='1.8' d='M1.2 1.6l5.3 5.3 5.3-5.3'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+select:invalid{color:var(--muted-ink)}
+textarea{resize:vertical;min-height:92px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  flex:1 1 auto;min-width:64px;min-height:48px;text-align:center;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--paper-light);
+  border:var(--border-fine) solid var(--ink-navy);border-radius:var(--radius-print);
+  padding:10px 11px;
+  font-family:var(--font-heading);font-weight:700;font-size:.98rem;
+  letter-spacing:.05em;text-transform:uppercase;color:var(--ink-navy);
+  transition:background var(--motion-fast) ease,color var(--motion-fast) ease;
+  -webkit-user-select:none;user-select:none}
+.chip:hover{background:var(--paper-aged)}
+.chip.sel{background:var(--ink-navy);color:var(--paper-cream);border-color:var(--ink-navy)}
+
+/* ---------- buttons ---------- */
+.go{
+  width:100%;cursor:pointer;min-height:56px;
+  background:var(--ink-navy);color:var(--paper-cream);
+  border:var(--border-strong) solid var(--antique-gold);
+  border-radius:var(--radius-print);padding:15px;margin-top:4px;
+  font-family:var(--font-heading);font-weight:800;font-size:1.16rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  transition:transform var(--motion-fast) ease, background var(--motion-fast) ease}
+.go:hover{background:var(--ink-navy-deep);transform:translateY(-2px)}
+.go:active{transform:translateY(0)}
+.go:focus-visible{outline:3px solid var(--antique-gold);outline-offset:3px}
+.alt{
+  width:100%;cursor:pointer;min-height:48px;
+  background:none;color:var(--ink-navy);
+  border:var(--border-fine) solid var(--line-soft);
+  border-radius:var(--radius-print);padding:12px;margin-top:9px;
+  font-family:var(--font-heading);font-weight:700;font-size:.95rem;
+  letter-spacing:.09em;text-transform:uppercase;
+  transition:border-color var(--motion-fast) ease}
+.alt:hover{border-color:var(--ink-navy)}
+.alt:focus-visible{outline:3px solid var(--antique-gold);outline-offset:2px}
+
+.fine{font-size:.88rem;color:var(--muted-ink);text-align:center;margin-top:16px;line-height:1.5}
+.fine strong{color:var(--ink-navy);font-weight:700}
+.sent{color:var(--ink-navy);font-weight:700}
+
+/* ---------- evidence strip ---------- */
+.evi{border-top:var(--border-fine) solid var(--line-soft);
+  border-bottom:var(--border-fine) solid var(--line-soft);
+  margin:22px 0 0;padding:14px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.evi .n{font-family:var(--font-display);font-size:2.1rem;line-height:.95;color:var(--ink-navy)}
+.evi .c{font-family:var(--font-heading);font-weight:600;font-size:.8rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted-ink);margin-top:3px;line-height:1.35}
+.evi-src{font-size:.72rem;color:var(--muted-ink);text-align:center;margin:9px 0 0;line-height:1.4}
+
+/* ---------- footer ---------- */
+.ft{margin-top:24px;padding-top:16px;border-top:var(--border-strong) solid var(--ink-navy)}
+.social{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.social a{
+  display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  padding:10px 15px;text-decoration:none;
+  border:var(--border-fine) solid var(--ink-navy);border-radius:var(--radius-print);
+  color:var(--ink-navy);font-family:var(--font-heading);font-weight:700;
+  font-size:.88rem;letter-spacing:.09em;text-transform:uppercase;
+  transition:background var(--motion-fast) ease,transform var(--motion-fast) ease}
+.social a:hover{background:var(--paper-aged);transform:translateY(-2px)}
+.social a:focus-visible{outline:3px solid var(--antique-gold);outline-offset:2px}
+.social svg{flex:0 0 auto}
+.disc{font-size:.75rem;color:var(--muted-ink);text-align:center;margin:16px 0 0;line-height:1.55}
+.disc .ehologo{display:inline-flex;align-items:center;gap:6px;margin-top:9px;
+  font-size:.7rem;letter-spacing:.04em}
+
+/* ---------- setup warning ---------- */
+.warn{background:var(--paper-light);border:var(--border-strong) solid var(--rust);
+  border-radius:var(--radius-print);padding:12px 14px;margin-bottom:16px;
+  font-size:.86rem;line-height:1.5;color:var(--ink-navy-deep)}
+.warn b{color:var(--rust);font-family:var(--font-heading);font-weight:800;
+  letter-spacing:.07em;text-transform:uppercase;display:block;margin-bottom:3px}
+
+/* ---------- toast ---------- */
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,200px);
+  background:var(--ink-navy);color:var(--paper-cream);
+  border:var(--border-fine) solid var(--antique-gold);border-radius:var(--radius-print);
+  font-family:var(--font-heading);font-weight:700;font-size:.95rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:13px 20px;z-index:99;opacity:0;pointer-events:none;
+  transition:transform 220ms ease, opacity 160ms ease;max-width:90vw;text-align:center}
+.toast.on{transform:translate(-50%,0);opacity:1}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition-duration:.01ms !important;animation-duration:.01ms !important}
+  .big:hover,.go:hover,.social a:hover{transform:none}
+}
+@media (max-width:360px){ .row{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <div id="warn" class="warn" style="display:none">
+    <b>Setup note. Only you see this.</b>
+    Your phone number is set. The YouTube URL is still a placeholder. Open the file, find the
+    CONFIG block near the top, and paste your real channel URL in. Set it to "" to hide the link.
+    This notice disappears on its own once you do.
+  </div>
+
+  <!-- ============ MASTHEAD ============ -->
+  <div class="mast">
+    <p class="eyebrow">Austin &amp; Surrounding · Est. Locally</p>
+    <div class="rule"></div>
+    <h1><span class="ln1">The Real Price.</span><span class="ln2">Not The Ad Price.</span></h1>
+    <p class="lede">Every listing in this city advertises a number you will not actually pay. I tell you the real one.</p>
+    <p class="who">Sam Joseph <span>· Apartment Locator &amp; Realtor</span></p>
+  </div>
+
+  <!-- ============ CHOICE ============ -->
+  <div id="pick">
+    <div class="divider">
+      <span class="ln"></span>
+      <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 0l2.2 9.8L24 12l-9.8 2.2L12 24l-2.2-9.8L0 12l9.8-2.2z" fill="#b88a2b"/>
+      </svg>
+      <span class="ln"></span>
+    </div>
+
+    <p class="q">Which one are you?</p>
+
+    <div class="choices">
+      <button class="big rent" onclick="go('rent')">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="#b88a2b" stroke-width="1.7" stroke-linecap="square">
+            <path d="M4 21V6l7-3v18M11 21h9V10l-9-3"/>
+            <path d="M7 9v1M7 13v1M7 17v1M15 12v1M15 16v1"/>
+          </svg>
+        </span>
+        <span class="tx">
+          <span class="t">I am renting <span class="arw" aria-hidden="true">&rsaquo;</span></span>
+          <span class="d">Apartments, houses, townhomes. I send you real available units at real all in prices. The service is free to you.</span>
+        </span>
+      </button>
+
+      <button class="big buy" onclick="go('buy')">
+        <span class="ico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+               stroke="#b88a2b" stroke-width="1.7" stroke-linecap="square">
+            <path d="M3 11l9-7 9 7"/>
+            <path d="M5.5 9.6V20h13V9.6"/>
+            <path d="M10 20v-5.5h4V20"/>
+          </svg>
+        </span>
+        <span class="tx">
+          <span class="t">I am thinking about buying <span class="arw" aria-hidden="true">&rsaquo;</span></span>
+          <span class="d">First home, or just curious what your rent would buy. No pressure and no lender calls.</span>
+        </span>
+      </button>
+    </div>
+
+    <p class="note">Not sure yet? Pick renting. We can talk about buying whenever you are ready.</p>
+
+    <div class="evi">
+      <div>
+        <div class="n">73%</div>
+        <div class="c">of Austin units are offering a concession right now</div>
+      </div>
+      <div>
+        <div class="n">$0</div>
+        <div class="c">what the locating service costs you</div>
+      </div>
+    </div>
+    <p class="evi-src">Concession figure: Austin metro, June 2026. Properties pay the referral fee, not renters.</p>
+  </div>
+
+  <!-- ============ RENT ============ -->
+  <div id="rent" class="panel">
+    <button class="back" onclick="go(null)">&lsaquo; Back</button>
+    <h2 class="phead">Let us find your place.</h2>
+    <p class="psub">Four questions. I text you real options, with every fee included, not just the base rent.</p>
+
+    <form onsubmit="return send(event,'rent')">
+      <div class="f">
+        <label for="r-move">When do you need to move in?</label>
+        <select id="r-move" name="move" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>As soon as possible, within 2 weeks</option>
+          <option>Within a month</option>
+          <option>One to two months out</option>
+          <option>Two to three months out</option>
+          <option>Three months or more, just looking</option>
+        </select>
+      </div>
+
+      <div class="f">
+        <label for="r-budget">All in monthly budget <span class="opt">(including fees)</span></label>
+        <select id="r-budget" name="budget" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>Under $1,000</option>
+          <option>$1,000 to $1,300</option>
+          <option>$1,300 to $1,600</option>
+          <option>$1,600 to $2,000</option>
+          <option>$2,000 to $2,500</option>
+          <option>$2,500 and up</option>
+        </select>
+      </div>
+
+      <div class="f">
+        <label id="r-beds-lbl">How many bedrooms?</label>
+        <div class="chips" data-name="beds" role="group" aria-labelledby="r-beds-lbl">
+          <div class="chip" tabindex="0" role="button">Studio</div>
+          <div class="chip" tabindex="0" role="button">1</div>
+          <div class="chip" tabindex="0" role="button">2</div>
+          <div class="chip" tabindex="0" role="button">3</div>
+          <div class="chip" tabindex="0" role="button">4+</div>
+        </div>
+      </div>
+
+      <div class="f">
+        <label for="r-area">What do you need to be near? <span class="opt">(work, school, family)</span></label>
+        <input id="r-area" name="area" placeholder="Downtown, Round Rock, UT campus" required>
+      </div>
+
+      <div class="f">
+        <label for="r-notes">Anything I should know? <span class="opt">(optional)</span></label>
+        <textarea id="r-notes" name="notes" placeholder="Pets, broken lease, credit concerns, must have washer and dryer, covered parking. I have seen it all. No judgment."></textarea>
+      </div>
+
+      <div class="row">
+        <div class="f"><label for="r-name">First name</label><input id="r-name" name="name" placeholder="Jasmine" required></div>
+        <div class="f"><label for="r-phone">Your number</label><input id="r-phone" name="phone" type="tel" inputmode="tel" placeholder="(512) 555 0123" required></div>
+      </div>
+
+      <button type="submit" class="go">Send this to Sam</button>
+      <button type="button" class="alt" onclick="send(null,'rent','email')">Email it instead</button>
+      <p class="fine" data-slot="rent"><strong>This costs you nothing.</strong> The property pays the referral fee. Your rent is the same whether you use me or walk in cold.</p>
+    </form>
+  </div>
+
+  <!-- ============ BUY ============ -->
+  <div id="buy" class="panel">
+    <button class="back" onclick="go(null)">&lsaquo; Back</button>
+    <h2 class="phead">Let us run your numbers.</h2>
+    <p class="psub">No lender call. No pressure. I tell you honestly whether buying beats renting for you right now, including when the answer is no.</p>
+
+    <form onsubmit="return send(event,'buy')">
+      <div class="f">
+        <label for="b-stage">Where are you in the process?</label>
+        <select id="b-stage" name="stage" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>Just curious what I could afford</option>
+          <option>Thinking about it within the next year</option>
+          <option>Seriously looking, three to six months</option>
+          <option>Ready now, want to see homes</option>
+          <option>Already pre approved</option>
+        </select>
+      </div>
+
+      <div class="f">
+        <label for="b-lease">When does your lease end? <span class="opt">(if you rent)</span></label>
+        <input id="b-lease" name="lease" placeholder="March 2027, or month to month">
+      </div>
+
+      <div class="f">
+        <label for="b-rent">What do you pay in rent now?</label>
+        <select id="b-rent" name="rent" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>Under $1,200</option>
+          <option>$1,200 to $1,500</option>
+          <option>$1,500 to $1,800</option>
+          <option>$1,800 to $2,200</option>
+          <option>$2,200 to $2,800</option>
+          <option>$2,800 and up, or not renting</option>
+        </select>
+      </div>
+
+      <div class="f">
+        <label id="b-first-lbl">Is this your first home?</label>
+        <div class="chips" data-name="first" role="group" aria-labelledby="b-first-lbl">
+          <div class="chip" tabindex="0" role="button">Yes</div>
+          <div class="chip" tabindex="0" role="button">No</div>
+          <div class="chip" tabindex="0" role="button">Owned before</div>
+        </div>
+      </div>
+
+      <div class="f">
+        <label for="b-area">Areas you would consider <span class="opt">(optional)</span></label>
+        <input id="b-area" name="area" placeholder="Kyle, Hutto, Manor, Pflugerville, or open to anything">
+      </div>
+
+      <div class="f">
+        <label for="b-notes">Questions or concerns? <span class="opt">(optional)</span></label>
+        <textarea id="b-notes" name="notes" placeholder="Down payment worries, credit, self employed, not sure where to start. Tell me what is actually on your mind."></textarea>
+      </div>
+
+      <div class="row">
+        <div class="f"><label for="b-name">First name</label><input id="b-name" name="name" placeholder="Marcus" required></div>
+        <div class="f"><label for="b-phone">Your number</label><input id="b-phone" name="phone" type="tel" inputmode="tel" placeholder="(512) 555 0123" required></div>
+      </div>
+
+      <button type="submit" class="go">Send this to Sam</button>
+      <button type="button" class="alt" onclick="send(null,'buy','email')">Email it instead</button>
+      <p class="fine" data-slot="buy"><strong>Free, and you get the straight answer.</strong> If renting is the better move for you right now, I will say so.</p>
+    </form>
+  </div>
+
+  <!-- ============ FOOTER ============ -->
+  <div class="ft">
+    <div class="social">
+      <a id="iglink" href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0c325f"
+             stroke-width="1.9" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5"/>
+          <circle cx="12" cy="12" r="4.3"/><circle cx="17.6" cy="6.4" r="1.2" fill="#0c325f" stroke="none"/>
+        </svg>
+        Instagram
+      </a>
+      <a id="ytlink" href="#" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0c325f"
+             stroke-width="1.9" aria-hidden="true">
+          <rect x="1.6" y="4.6" width="20.8" height="14.8" rx="4"/>
+          <path d="M10 8.9l5.6 3.1-5.6 3.1z" fill="#0c325f" stroke="none"/>
+        </svg>
+        YouTube
+      </a>
+    </div>
+    <p class="disc">
+      Sam Joseph · Licensed real estate agent, State of Texas · Austin and surrounding areas.<br>
+      Apartment locating is free to renters. Participating properties pay the referral fee.<br>
+      Advertised rents, availability, and concessions change daily and are not guaranteed.
+      <span class="ehologo">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#596368"
+             stroke-width="2" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5.5 9.6V20h13V9.6"/></svg>
+        Equal Housing Opportunity
+      </span>
+    </p>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ---------- fit the poster headline to its column ----------
+   League Gothic is narrow; the system fallbacks are not. Rather than
+   trust the webfont to load, measure and shrink until each line fits. */
+function fitHeadlines(){
+  document.querySelectorAll('h1, .phead').forEach(function(el){
+    el.style.fontSize = '';
+    var avail = el.parentElement.clientWidth;
+    if(!avail) return;
+    var size = parseFloat(getComputedStyle(el).fontSize);
+    var guard = 0;
+    while(el.scrollWidth > avail && size > 20 && guard++ < 90){
+      size -= 1;
+      el.style.fontSize = size + 'px';
+    }
+  });
+}
+fitHeadlines();
+window.addEventListener('resize', fitHeadlines);
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitHeadlines);
+
+/* ---------- setup ---------- */
+document.getElementById('iglink').href = 'https://instagram.com/' + CONFIG.IG;
+var yt = document.getElementById('ytlink');
+if (CONFIG.YOUTUBE) { yt.href = CONFIG.YOUTUBE; } else { yt.remove(); }
+if (CONFIG.YOUTUBE === "https://youtube.com/@samsellsit") {
+  document.getElementById('warn').style.display = 'block';
+}
+
+/* ---------- panel routing ---------- */
+function go(which){
+  document.getElementById('pick').style.display = which ? 'none' : 'block';
+  ['rent','buy'].forEach(function(id){
+    document.getElementById(id).classList.toggle('on', id === which);
+  });
+  fitHeadlines();                      /* panels are hidden until now, so measure on open */
+  window.scrollTo({top:0, behavior:'smooth'});
+  history.replaceState(null,'', which ? '#'+which : location.pathname);
+  if(which){ var h = document.querySelector('#'+which+' .phead'); if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); } }
+}
+
+/* ---------- chips (mouse + keyboard) ---------- */
+document.querySelectorAll('.chips').forEach(function(group){
+  function pick(el){
+    group.querySelectorAll('.chip').forEach(function(c){
+      c.classList.remove('sel'); c.setAttribute('aria-pressed','false');
+    });
+    el.classList.add('sel'); el.setAttribute('aria-pressed','true');
+  }
+  group.querySelectorAll('.chip').forEach(function(c){
+    c.setAttribute('aria-pressed','false');
+    c.addEventListener('click', function(){ pick(c); });
+    c.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pick(c); }
+    });
+  });
+});
+
+/* ---------- toast ---------- */
+var tt;
+function toast(msg){
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(tt); tt = setTimeout(function(){ t.classList.remove('on'); }, 3600);
+}
+
+/* ---------- build the message ---------- */
+function collect(kind){
+  var panel = document.getElementById(kind);
+  function v(n){ var f = panel.querySelector('[name="'+n+'"]'); return f ? f.value.trim() : ''; }
+  function chip(n){ var s = panel.querySelector('.chips[data-name="'+n+'"] .sel'); return s ? s.textContent.trim() : ''; }
+
+  var L = [];
+  if(kind === 'rent'){
+    L.push("NEW RENTER LEAD");
+    L.push("Name: " + v('name'));
+    L.push("Phone: " + v('phone'));
+    L.push("Move: " + v('move'));
+    L.push("Budget: " + v('budget'));
+    if(chip('beds')) L.push("Beds: " + chip('beds'));
+    L.push("Near: " + v('area'));
+    if(v('notes')) L.push("Notes: " + v('notes'));
+  } else {
+    L.push("NEW BUYER LEAD");
+    L.push("Name: " + v('name'));
+    L.push("Phone: " + v('phone'));
+    L.push("Stage: " + v('stage'));
+    if(v('lease')) L.push("Lease ends: " + v('lease'));
+    L.push("Rent now: " + v('rent'));
+    if(chip('first')) L.push("First home: " + chip('first'));
+    if(v('area')) L.push("Areas: " + v('area'));
+    if(v('notes')) L.push("Notes: " + v('notes'));
+  }
+  return L.join("\n");
+}
+
+/* ---------- send ---------- */
+function send(ev, kind, mode){
+  if(ev) ev.preventDefault();
+  var form = document.getElementById(kind).querySelector('form');
+  if(!form.reportValidity()) return false;
+
+  var body = collect(kind);
+  var subj = kind === 'rent' ? 'New renter lead from your website'
+                             : 'New buyer lead from your website';
+
+  if(mode === 'email'){
+    location.href = 'mailto:' + CONFIG.EMAIL
+      + '?subject=' + encodeURIComponent(subj)
+      + '&body='   + encodeURIComponent(body);
+    thanks(kind); return false;
+  }
+
+  var iOS = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent);
+  location.href = 'sms:+' + CONFIG.PHONE + (iOS ? '&' : '?') + 'body=' + encodeURIComponent(body);
+
+  setTimeout(function(){
+    if(document.hidden) return;
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(body)
+        .then(function(){ toast('Copied. Paste it in a text to Sam.'); })
+        .catch(function(){});
+    }
+  }, 900);
+
+  thanks(kind); return false;
+}
+
+function thanks(kind){
+  var p = document.querySelector('.fine[data-slot="'+kind+'"]');
+  if(p) p.innerHTML = '<span class="sent">Sent. If your messages app did not open, '
+    + 'your answers were copied. Just paste them to Sam.</span>';
+}
+
+if(location.hash === '#rent' || location.hash === '#buy') go(location.hash.slice(1));
+</script>
+</body>
+</html>

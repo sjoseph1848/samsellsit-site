@@ -1,0 +1,36 @@
+# Netlify configuration for samsellsit-site
+# Static single-page site. No build step.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# HTML must never be cached hard, or Sam's edits will not show up.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Friendly short paths
+[[redirects]]
+  from = "/start"
+  to = "/"
+  status = 200
+
+[[redirects]]
+  from = "/rent"
+  to = "/#rent"
+  status = 302
+
+[[redirects]]
+  from = "/buy"
+  to = "/#buy"
+  status = 302
