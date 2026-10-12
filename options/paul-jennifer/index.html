@@ -254,6 +254,12 @@ const SPECIALS = {
     {tag:"Ask first", title:"Builder incentives not posted",
      text:"Brohn Homes doesn't list a current rate special or closing-cost offer for Harvest Ridge online. I'll ask what they'll put toward closing costs and rate buydowns before you tour."}
   ],
+  drb: [
+    {tag:"Incentive", title:"Up to $40,000 in flex cash (estimated)",
+     text:"DRB advertises up to $40,000 in flex cash on select homes, plus a refrigerator, washer, dryer and blinds on qualifying contracts. Terms vary by home and lender, and aren't guaranteed. I'll confirm which homes qualify and how much can go toward price and closing costs."},
+    {tag:"Negotiate", title:"How this could fit the budget",
+     text:"At full price these homes are over budget. The 3-bed Blanton at $299,990 gets close if about $40,000 comes off the price: roughly $2,160/mo at a 4.99% rate, or about $2,510 at today's market rate. On FHA, money for closing costs and rate buydowns is capped at 6% of the price, so the flex cash works best as a price cut."}
+  ],
   kb: [
     {tag:"Rate special", title:"4.99% FHA 5/1 ARM (5.781% APR), sign by Oct 31",
      text:"Financing with KBHS Home Loans. Includes a $5,000 closing-cost credit. Heads up: this is an adjustable rate. It's fixed for 5 years, then can adjust each year (KB's own example rises to 6.43% in year 6)."},
@@ -393,6 +399,18 @@ const C = [
    {a:"23617 Firelight Dr",p:"Morrow",bd:4,ba:"2.5",sf:1867,price:239999,status:"Under construction"},
    {a:"23717 Grackle Cv",p:"Barlow",bd:4,ba:"2.5",sf:2173,price:244999,status:"Under construction"}
   ]},
+ {id:"creeks-crossing", name:"Creeks Crossing", city:"Elgin", builder:"DRB Homes",
+  addr:"13404 Barn Chime St (model home), Elgin, TX 78621", lat:30.372, lng:-97.428, hoa:42,
+  drive:"30–35 min", isd:"Elgin ISD", specials:"drb",
+  note:"Bigger homes than the rest of Elgin, with a model open to tour. Listed prices are above the budget, so this one depends on negotiating: DRB is advertising up to $40,000 in flex cash. HOA is about $500 a year. The estimates below are at full price, before any discount.",
+  plans:["Blanton · 3 bed · 1,605 sq ft","Dickens III · 3–4 bed · 2,140–2,160 sq ft","Orwell III · 3–4 bed · 2,250–2,596 sq ft"],
+  homes:[
+   {a:"13523 Barn Chime St",p:"Blanton",bd:3,ba:"2",sf:1605,price:299990},
+   {a:"13428 Barn Chime St",p:"Dickens III",bd:4,ba:"2",sf:2160,price:319990},
+   {a:"13424 Barn Chime St",p:"Orwell III",bd:4,ba:"2.5",sf:2596,price:324990},
+   {a:"13433 Muny Pkwy",p:"Dickens III",bd:3,ba:"2",sf:2140,price:329990},
+   {a:"13520 Barn Chime St",p:"Orwell III",bd:3,ba:"2.5",sf:2250,price:334990}
+  ]},
  {id:"harvest-ridge", name:"Harvest Ridge", city:"Elgin", builder:"Brohn Homes",
   addr:"103 Roost Rd (sales office), Elgin, TX 78621", lat:30.352, lng:-97.355, hoa:70,
   drive:"35–40 min", isd:"Elgin ISD", specials:"brohn",
@@ -424,7 +442,7 @@ const C = [
 ];
 /* Order by drive time and number the pins */
 (function(){
-  const order=["frontier","durango","palomino","prairie-lakes","wayside","pradera","elm-creek","bollinger","cotton-gateway","harvest-ridge","sunset-oaks","lantana"];
+  const order=["frontier","durango","palomino","prairie-lakes","wayside","pradera","elm-creek","creeks-crossing","bollinger","cotton-gateway","harvest-ridge","sunset-oaks","lantana"];
   C.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
   C.forEach((c,i)=>{ c.n=i+1;
     c.homes.forEach(h=>{ if(h.pm==null){ h.est=true; h.pm=estPayment(h.price,0.0499,c.hoa); h.pmMkt=estPayment(h.price,0.071,c.hoa); } });
@@ -524,7 +542,7 @@ function renderDetail(c){
   const homes = c.homes.slice().sort((a,b)=>a.pm-b.pm).map(h=>{
     const inB = h.pm<=BUDGET;
     return `<article class="home">
-      <span class="fit ${inB?"in":"st"}">${h.pm<2000?"Under budget":inB?"In budget":"Slight stretch"}</span>
+      <span class="fit ${inB?"in":"st"}">${h.pm<2000?"Under budget":inB?"In budget":h.pm<=2350?"Slight stretch":"Over budget, negotiate"}</span>
       <div><div class="plan">${esc(/^Plan /.test(h.p)?h.p:h.p+" plan")}${h.status?" · "+esc(h.status):""}</div><h3>${esc(h.a)}</h3>
       <div class="spec num">${[h.bd+" bed", h.ba+" bath", h.sf.toLocaleString("en-US")+" sq ft", h.st?h.st+"-story":"", h.g?h.g+"-car garage":""].filter(Boolean).join(" · ")}</div></div>
       <div class="price num"><b>${h.from?"From ":""}${money(h.price)}</b>${h.was?`<span class="was">was ${money(h.was)}</span>`:""}</div>
@@ -540,7 +558,7 @@ function renderDetail(c){
       <div class="facts"><span class="chip">Drive to Giga <b>${esc(c.drive)}</b></span><span class="chip">Schools <b>${esc(c.isd)}</b></span><span class="chip">Homes listed <b>${c.homes.length}</b></span></div></div>
     ${sp}
     <p class="note">${esc(c.note)}</p>
-    <h3 style="font-size:20px;margin-bottom:10px">Floor plans that fit the budget</h3>
+    <h3 style="font-size:20px;margin-bottom:10px">${c.specials==="drb"?"Floor plans":"Floor plans that fit the budget"}</h3>
     <div class="plans">${c.plans.map(p=>`<span class="chip">${esc(p)}</span>`).join("")}</div>
     <h3 style="font-size:20px;margin-bottom:10px">Homes for sale now</h3>
     <div class="homes">${homes}</div>`;
