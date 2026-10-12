@@ -29,3 +29,9 @@
   from = "/buy"
   to = "/#buy"
   status = 302
+
+# Private client pages: keep out of search engines
+[[headers]]
+  for = "/options/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

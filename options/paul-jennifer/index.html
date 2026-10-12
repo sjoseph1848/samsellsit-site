@@ -1,0 +1,511 @@
+<title>Jennifer &amp; Paul's Shortlist</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Sam Sells It brand (navy / warm paper / burnt orange). Navy title band, then map + community list; each community opens its own homes page. Single brand look in every theme. */
+:root{
+  --navy:#062e61;
+  --navy-deep:#041f42;
+  --orange:#c74b24;
+  --cream:#f3e5c3;
+  --warm:#faf7ef;
+  --bg:#faf7ef;
+  --surface:#ffffff;
+  --ink:#15232f;
+  --muted:#5a6470;
+  --line:#e2dccb;
+  --land:#efe9d9;
+  --road:#ffffff;
+  --road-edge:#cfc6ae;
+  --toll:#e9b98f;
+  --sign:#062e61;
+  --sign-ink:#ffffff;
+  --amber:#c74b24;
+  --amber-ink:#ffffff;
+  --amber-soft:#f8eed6;
+  --good:#1d6b45;
+  --stretch:#a8461f;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Inter",Arial,system-ui,sans-serif;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+/* Header */
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:18px}
+.eyebrow{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sign)}
+.top h1{font-size:clamp(28px,4.4vw,44px);font-weight:800;margin-top:4px}
+.top p{margin:6px 0 0;color:var(--muted);max-width:58ch}
+.budget{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--display);font-weight:700;font-size:13px;padding:6px 10px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.chip b{color:var(--sign)}
+
+/* Map view */
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.layout{grid-template-columns:1fr}}
+.mapbox{position:relative;background:var(--land);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.mapbox svg{display:block;width:100%;height:auto}
+.road{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.road.edge{stroke:var(--road-edge);stroke-width:9}
+.road.main{stroke:var(--road);stroke-width:6}
+.road.toll{stroke:var(--toll);stroke-width:6}
+.town{font-family:var(--display);font-weight:700;font-size:15px;fill:var(--muted);letter-spacing:.04em}
+.town-dot{fill:var(--muted)}
+.shield-i{fill:#1f4fa3}
+.shield-txt{font-family:var(--display);font-weight:800;font-size:11px;fill:#fff}
+.shield-t{fill:var(--surface);stroke:var(--muted);stroke-width:1.5}
+.shield-ttxt{font-family:var(--display);font-weight:800;font-size:10px;fill:var(--ink)}
+.giga{fill:#c8102e}
+.giga-txt{font-family:var(--display);font-weight:800;font-size:14px;fill:var(--ink)}
+.pin{cursor:pointer}
+.pin circle{fill:var(--sign);stroke:var(--surface);stroke-width:3;transition:r .15s}
+.pin text{font-family:var(--display);font-weight:800;font-size:15px;fill:var(--sign-ink);pointer-events:none}
+.pin:hover circle,.pin.on circle{r:19}
+.pin:focus-visible{outline:none}
+.pin:focus-visible circle{stroke:var(--amber);stroke-width:4}
+.maplegend{position:absolute;left:10px;bottom:10px;display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted);background:color-mix(in srgb,var(--surface) 88%,transparent);padding:6px 10px;border-radius:6px}
+.maplegend span{display:inline-flex;align-items:center;gap:5px}
+.sw{width:18px;height:5px;border-radius:3px;display:inline-block}
+
+.pop{position:absolute;width:250px;max-width:calc(100% - 20px);background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:14px;z-index:5}
+.pop h3{font-size:19px}
+.pop .sub{color:var(--muted);font-size:13px;margin-top:2px}
+.pop dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:10px 0 12px;font-size:13px}
+.pop dt{color:var(--muted)}
+.pop dd{margin:0;font-weight:600;text-align:right}
+.pop .x{position:absolute;top:6px;right:8px;border:0;background:none;font-size:20px;line-height:1;cursor:pointer;color:var(--muted);padding:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:7px;background:var(--sign);color:var(--sign-ink);font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.03em;padding:10px 14px;cursor:pointer;width:100%}
+.btn:hover{filter:brightness(1.08)}
+
+/* Community list */
+.list{display:grid;gap:10px}
+.listhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.listhead h2{font-size:20px}
+.listhead span{color:var(--muted);font-size:13px}
+.ccard{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer;width:100%}
+.ccard:hover{border-color:var(--sign)}
+.ccard.on{border-color:var(--sign);box-shadow:0 0 0 1px var(--sign)}
+.badge{width:32px;height:32px;border-radius:50%;background:var(--sign);color:var(--sign-ink);font-family:var(--display);font-weight:800;display:grid;place-items:center}
+.ccard h3{font-size:17px}
+.ccard .meta{font-size:13px;color:var(--muted)}
+.ccard .from{text-align:right;font-size:12px;color:var(--muted)}
+.ccard .from b{display:block;font-family:var(--display);font-size:17px;color:var(--ink)}
+.also{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:4px}
+
+/* Detail view */
+.back{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:7px;padding:8px 12px;font-family:var(--display);font-weight:700;cursor:pointer;margin-bottom:16px}
+.back:hover{border-color:var(--sign)}
+.dhead{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:flex-end;padding-bottom:16px;border-bottom:2px solid var(--ink);margin-bottom:18px}
+.dhead h2{font-size:clamp(28px,4vw,40px);font-weight:800}
+.dhead .addr{color:var(--muted);margin-top:4px}
+.facts{display:flex;flex-wrap:wrap;gap:8px}
+.special{background:var(--amber-soft);border:1px solid var(--amber);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.special .tag{display:inline-block;background:var(--amber);color:var(--amber-ink);font-family:var(--display);font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-bottom:6px}
+.special h3{font-size:18px;margin-bottom:4px}
+.special p{margin:0;font-size:14px;max-width:75ch}
+.note{font-size:14px;color:var(--muted);margin:12px 0 18px;max-width:75ch}
+.plans{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.plans .chip{font-weight:600}
+.homes{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.home{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.home .plan{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--sign)}
+.home h3{font-size:18px}
+.home .spec{font-size:13px;color:var(--muted)}
+.home .price{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-top:1px solid var(--line);padding-top:10px}
+.home .price b{font-family:var(--display);font-size:22px}
+.home .was{text-decoration:line-through;color:var(--muted);font-size:13px}
+.rows{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:14px}
+.rows dt{color:var(--muted)}
+.rows dd{margin:0;text-align:right;font-weight:600}
+.pmt{font-family:var(--display);font-weight:800;font-size:18px}
+.fit{font-family:var(--display);font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:4px;align-self:flex-start}
+.fit.in{background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)}
+.fit.st{background:color-mix(in srgb,var(--stretch) 15%,transparent);color:var(--stretch)}
+
+.fine{margin-top:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;max-width:90ch}
+.fine p{margin:0 0 6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* Brand layer */
+.band{background:radial-gradient(120% 140% at 0% 0%,#0a3d7d 0%,var(--navy) 45%,var(--navy-deep) 100%);color:#fff;padding-inline:16px}
+.band-in{max-width:1180px;margin:0 auto;padding-block:22px 34px}
+.brandbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.wordmark{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.06em;color:#fff;text-decoration:none}
+.wordmark span{color:var(--orange)}
+.brandbar small{font-size:13px;color:#c9d4e6}
+.band .eyebrow{color:#f0a07f;font-size:13px}
+.band h1{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(40px,7vw,76px);line-height:.95;letter-spacing:.005em;margin-top:6px;color:#fff}
+.band p{color:#dbe3ef;max-width:62ch;margin:14px 0 0;font-size:16px}
+.band .rule{width:72px;height:5px;background:var(--orange);margin:20px 0 18px}
+.band .budget .chip{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff}
+.band .budget .chip b{color:var(--cream)}
+.top{display:none}
+.eyebrow{color:var(--orange)}
+.pin circle{fill:var(--orange)}
+.pin text{fill:#fff}
+.badge{background:var(--navy)}
+.ccard:hover,.ccard.on{border-color:var(--orange)}
+.ccard.on{box-shadow:0 0 0 1px var(--orange)}
+.btn{background:var(--navy);text-transform:uppercase}
+.special .tag{background:var(--orange);color:#fff}
+.dhead{border-bottom-color:var(--navy)}
+.dhead h2,.listhead h2,.ccard h3,.pop h3,.home h3{color:var(--navy);text-transform:uppercase;letter-spacing:.01em}
+.home .plan{color:var(--orange)}
+.chip b{color:var(--navy)}
+.foot{background:var(--navy);color:#c9d4e6;padding-inline:16px}
+.foot .in{max-width:1180px;margin:0 auto;padding-block:22px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:13px}
+.foot a{color:#fff}
+</style>
+
+<div class="band">
+  <div class="band-in">
+    <div class="brandbar">
+      <a class="wordmark" href="/">SAM <span>SELLS</span> IT</a>
+      <small>Prepared by Sam Joseph, REALTOR® · Spirit Real Estate Group</small>
+    </div>
+    <div class="eyebrow">Private shortlist · Prepared October 12, 2026</div>
+    <h1>Jennifer &amp; Paul's<br>New-Home Shortlist</h1>
+    <div class="rule"></div>
+    <p>New construction along SH-130 that fits a payment around $2,000–$2,200 a month, sorted by the drive to Giga Texas. Tap a pin or a community to see the homes for sale, the builder specials, and estimated monthly payments.</p>
+    <div class="budget" style="margin-top:18px">
+      <span class="chip">Target payment <b class="num">$2,000–$2,200</b></span>
+      <span class="chip">Loan <b>FHA · 3.5% down</b></span>
+      <span class="chip">Commute <b>Giga Texas</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">South &amp; Southeast Austin · Along SH-130</div>
+      <h1>New Homes Near Giga Texas</h1>
+      <p>Move-in-ready new construction that fits a payment around $2,000–$2,200 a month, with a reasonable drive to the Tesla Gigafactory. Tap a community to see its homes and current builder specials.</p>
+    </div>
+    <div class="budget">
+      <span class="chip">Target payment <b class="num">$2,000–$2,200</b></span>
+      <span class="chip">Loan <b>FHA · 3.5% down</b></span>
+    </div>
+  </header>
+
+  <section id="mapView" aria-label="Map of communities">
+    <div class="layout">
+      <div class="mapbox" id="mapbox">
+        <svg id="map" viewBox="0 0 600 877" role="img" aria-label="Map of new home communities south and southeast of Austin"></svg>
+        <div class="maplegend">
+          <span><span class="sw" style="background:var(--road);outline:1px solid var(--road-edge)"></span>Interstate</span>
+          <span><span class="sw" style="background:var(--toll)"></span>Toll road</span>
+          <span>Map is approximate</span>
+        </div>
+        <div class="pop" id="pop" hidden></div>
+      </div>
+      <div class="list">
+        <div class="listhead"><h2>Communities</h2><span>Sorted by drive to Giga Texas</span></div>
+        <div id="clist" class="list"></div>
+        <p class="also">Builders shown: D.R. Horton, Lennar and KB Home. Century Communities' homes near this commute start above $300,000, so they're over budget. Their closest under-$300K option is in Elgin, about 35–40 minutes from the Gigafactory.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="detailView" hidden aria-live="polite"></section>
+
+  <footer class="fine">
+    <p>Prices, specials and estimated monthly payments come from the builders' websites as of October 12, 2026, and can change or sell at any time. For D.R. Horton homes, payments are the builder's own estimates (principal, interest, taxes, insurance, mortgage insurance and HOA) and assume its current special rate; without the special, expect roughly $300–$350 more per month. For Lennar and KB Home, payments are my own estimates on a 30-year FHA loan with 3.5% down, assuming a 2.5% property tax rate, $110/month insurance and $50/month HOA; actual tax rates and HOA dues vary by community. KB prices are base prices before homesite premiums and options. Specials require financing with the builder's affiliated lender and have deadlines.</p>
+    <p>Down payments shown are 3.5% of the price. Closing costs, prepaid taxes and insurance, and escrow deposits are extra unless a builder special covers them. Drive times are rough estimates without traffic; check them at your actual shift times. D.R. Horton plan names are matched by square footage, and the Lennar Pradera and Cotton Gateway pins are placed approximately. This page is not a loan offer.</p>
+  </footer>
+</div>
+<div class="foot"><div class="in">
+  <span>Questions about any of these homes? Call or text <a href="tel:+17372777519">(737) 277-7519</a> or email sam@samsellsit.com</span>
+  <span>Sam Joseph, REALTOR® · Brokered by Spirit Real Estate Group, LLC</span>
+  <span style="flex-basis:100%;display:flex;flex-wrap:wrap;gap:6px 20px;font-size:14px"><a href="/IABS.pdf" target="_blank" rel="noopener">Texas Real Estate Commission Information About Brokerage Services</a><a href="https://www.trec.texas.gov/forms/consumer-protection-notice" target="_blank" rel="noopener">Texas Real Estate Commission Consumer Protection Notice</a></span>
+</div></div>
+
+<script>
+(function(){
+const SPECIALS = {
+  austin: [
+    {tag:"Rate special", title:"4.99% FHA fixed rate (5.697% APR) with 3.5% down",
+     text:"Available on select D.R. Horton homes. Contract on or after Aug 27 and close by Oct 30, 2026. Requires financing with DHI Mortgage, and points may be needed to get the advertised rate."},
+    {tag:"Sales event", title:"Red Tag sales event — savings end Nov 1",
+     text:"D.R. Horton's Austin-area sales event is running now. Ask which homes in this community are included."}
+  ],
+  sanmarcos: [
+    {tag:"Sales event", title:"Red Tag event: special pricing + all closing costs paid",
+     text:"Contract Oct 5 – Nov 2 and close by Nov 30, 2026, financing with DHI Mortgage. Covers lender, title, appraisal and recording fees. It does not cover discount points, tax and insurance escrows, mortgage insurance or HOA dues."}
+  ],
+  lantana: [
+    {tag:"Ask first", title:"Red Tag event may apply",
+     text:"D.R. Horton's San Marcos-area Red Tag event (all closing costs paid, contract by Nov 2, close by Nov 30) isn't listed on this community's page yet. I'll confirm whether these homes qualify."}
+  ],
+  lennar: [
+    {tag:"Sales event", title:"Lennar Fall Super Sale",
+     text:"Lennar is running a Fall Super Sale on these homes. Lennar's rate specials and closing-cost help change often (recent ones included a 3.99% FHA fixed rate) and require financing with Lennar Mortgage. I'll confirm the current terms before you tour."}
+  ],
+  kb: [
+    {tag:"Rate special", title:"4.99% FHA 5/1 ARM (5.781% APR), sign by Oct 31",
+     text:"Financing with KBHS Home Loans. Includes a $5,000 closing-cost credit. Heads up: this is an adjustable rate. It's fixed for 5 years, then can adjust each year (KB's own example rises to 6.43% in year 6)."},
+    {tag:"Build to order", title:"Personalized homes in about 4 months",
+     text:"Prices shown are base prices for each plan. A homesite premium may apply, and your design-studio choices add to the price."}
+  ]
+};
+const EST = {tax:0.025, ins:110, hoa:50, mip:0.0055, ufmip:0.0175};
+function estPayment(price, rate){
+  const loan = price*0.965*(1+EST.ufmip), r = rate/12, n = 360;
+  const pi = loan*r/(1-Math.pow(1+r,-n));
+  return pi + loan*EST.mip/12 + price*EST.tax/12 + EST.ins + EST.hoa;
+}
+
+const C = [
+ {id:"frontier", n:1, name:"Frontier", city:"Mustang Ridge", builder:"D.R. Horton",
+  addr:"8519 Honest Cattleman Rd, Mustang Ridge, TX 78610", lat:30.05149, lng:-97.69674,
+  drive:"15–20 min", isd:"Del Valle ISD", specials:"austin",
+  note:"Closest option to the Gigafactory, just off SH-130. Pool, splash pad and pickleball amenity center coming soon.",
+  plans:["Yosemite II · 3 bed · 1,366 sq ft · from the $264s","Redwood II · 3 bed · 1,514 sq ft · from the $274s"],
+  homes:[
+   {a:"8414 Rhinestone Rd",p:"Yosemite II",bd:3,ba:"2",sf:1366,st:1,g:2,price:268990,pm:2120.36},
+   {a:"8519 Faded Denim Dr",p:"Yosemite II",bd:3,ba:"2",sf:1366,st:1,g:2,price:268990,pm:2135.18},
+   {a:"8412 Rhinestone Rd",p:"Redwood II",bd:3,ba:"2",sf:1514,st:1,g:2,price:275990,pm:2174.06},
+   {a:"8503 Faded Denim Dr",p:"Redwood II",bd:3,ba:"2",sf:1514,st:1,g:2,price:277690,pm:2202.41}
+  ]},
+ {id:"durango", n:2, name:"Durango", city:"Mustang Ridge", builder:"D.R. Horton",
+  addr:"13412 Roughstock Way, Mustang Ridge, TX 78610", lat:30.0647, lng:-97.68037,
+  drive:"15–20 min", isd:"Del Valle ISD", specials:"austin",
+  note:"Modern farmhouse homes next to Frontier, with a beach-entry pool and playground already open.",
+  plans:["Caroline · 3 bed · 1,470 sq ft · from the $273s","Taylor · 4 bed · 1,600 sq ft · from the $284s"],
+  homes:[
+   {a:"13210 Cerise Queen Way",p:"Caroline",bd:3,ba:"2",sf:1470,st:1,g:2,price:268490,was:275990,pm:2142.18},
+   {a:"12011 Pike Bend",p:"Caroline",bd:3,ba:"2",sf:1470,st:1,g:2,price:268990,was:272990,pm:2145.72},
+   {a:"13217 Cerise Queen Way",p:"Taylor",bd:4,ba:"2",sf:1600,st:1,g:2,price:282990,was:286990,pm:2244.83}
+  ]},
+ {id:"prairie-lakes", n:3, name:"Prairie Lakes", city:"Buda", builder:"D.R. Horton",
+  addr:"142 Illusion Lake Lane, Buda, TX 78640", lat:30.03582, lng:-97.76865,
+  drive:"25–30 min", isd:"Hays CISD", specials:"austin",
+  note:"Master-planned community between two lakes, with a pool, clubhouse, soccer field and trails. Reaches the Gigafactory by SH-45 and SH-130 (toll roads).",
+  plans:["Caprock · 3 bed · 1,434 sq ft · from the $262s","Opal · 3 bed · 1,565 sq ft · from the $258s","Davis · 3 bed · 1,470 sq ft · from the $264s"],
+  homes:[
+   {a:"177 Childress St",p:"Caprock",bd:3,ba:"2",sf:1434,st:1,g:2,price:257490,pm:2047.70},
+   {a:"242 Bardwell Way",p:"Opal",bd:3,ba:"2.5",sf:1565,st:2,g:2,price:262185,pm:2083.57},
+   {a:"185 Childress St",p:"Davis",bd:3,ba:"2.5",sf:1470,st:2,g:2,price:268990,pm:2135.57}
+  ]},
+ {id:"wayside", n:4, name:"Wayside", city:"Uhland", builder:"D.R. Horton",
+  addr:"314 Arnold Loop, Uhland, TX 78640", lat:29.97573, lng:-97.7851,
+  drive:"~30 min", isd:"Hays CISD", specials:"austin",
+  note:"The lowest payments on this page. These are smaller homes with 1-car garages on lots numbered A/B, so confirm with the builder whether they're attached. Uhland Elementary is across the street.",
+  plans:["Sarah · 2 bed · 995 sq ft · from the $193s","Allison · 3 bed · 1,093 sq ft · from the $203s","Maddie · 3 bed · 1,330 sq ft · from the $214s"],
+  homes:[
+   {a:"145B Harrison Crossing",p:"Sarah",bd:2,ba:"2",sf:995,st:1,g:1,price:193260,was:199260,pm:1532.53},
+   {a:"230B Harrison Crossing",p:"Sarah",bd:2,ba:"2",sf:995,st:1,g:1,price:194990,pm:1545.89},
+   {a:"157A Harrison Crossing",p:"Allison",bd:3,ba:"2",sf:1093,st:1,g:1,price:199990,was:204990,pm:1584.50},
+   {a:"245A Harrison Crossing",p:"Maddie",bd:3,ba:"2",sf:1330,st:1,g:1,price:214990,was:217990,pm:1700.35}
+  ]},
+ {id:"bollinger", n:5, name:"Bollinger", city:"Maxwell", builder:"D.R. Horton",
+  addr:"336 Bollinger Blvd, Maxwell, TX 78656", lat:29.93256, lng:-97.76144,
+  drive:"30–35 min", isd:"Hays CISD", specials:"sanmarcos",
+  note:"New master-planned community east of Kyle with a resort-style pool, pickleball and trails. Back yards include a 6-ft privacy fence, sod and irrigation.",
+  plans:["Robin · 2 bed · 1,130 sq ft","Alamo · 3 bed · 1,190 sq ft","Barton · 3 bed · 1,280 sq ft","Caprock · 3 bed · 1,434 sq ft","Emma · 4 bed · 1,572 sq ft","Emory · 5 bed · 1,971 sq ft"],
+  homes:[
+   {a:"120 Kendall Ln",p:"Robin",bd:2,ba:"2.5",sf:1130,st:2,g:1,price:198990,was:244480,pm:1613.91},
+   {a:"216 Kendall Ln",p:"Alamo",bd:3,ba:"2",sf:1190,st:1,g:2,price:239990,pm:1930.58},
+   {a:"107 Howard Dr",p:"Barton",bd:3,ba:"2",sf:1280,st:1,g:2,price:241990,pm:1946.03},
+   {a:"100 Samuel Dr",p:"Caprock",bd:3,ba:"2",sf:1434,st:1,g:2,price:261180,pm:2094.24},
+   {a:"241 Howard Dr",p:"Emma",bd:4,ba:"2",sf:1572,st:1,g:2,price:271990,pm:2177.73},
+   {a:"208 Kendall Ln",p:"Emory",bd:5,ba:"2.5",sf:1971,st:2,g:2,price:279990,pm:2239.52}
+  ]},
+ {id:"lantana", n:6, name:"Lantana", city:"Lockhart", builder:"D.R. Horton",
+  addr:"708 Indian Paintbrush Rd, Lockhart, TX 78644", lat:29.912, lng:-97.733,
+  drive:"35–40 min", isd:"Lockhart ISD", specials:"lantana",
+  note:"The most house for the money here, including 4- and 5-bedroom homes inside the budget. About 10 minutes from downtown Lockhart, but the longest drive to the Gigafactory.",
+  plans:["Barton · 3 bed · 1,280 sq ft","Atlanta · 3 bed · 1,156 sq ft","Caprock · 3 bed · 1,434 sq ft","Emma · 4 bed · 1,573 sq ft","Franklin · 5 bed · 1,892 sq ft"],
+  homes:[
+   {a:"2308 Red Bird Trace",p:"Barton",bd:3,ba:"2",sf:1280,st:1,g:2,price:241990,pm:1880.94},
+   {a:"2305 Red Bird Trace",p:"Emma",bd:4,ba:"2",sf:1573,st:1,g:2,price:261990,was:297990,pm:2032.26},
+   {a:"2319 Red Bird Trace",p:"Atlanta",bd:3,ba:"2",sf:1156,st:1,g:2,price:265990,pm:2062.54},
+   {a:"2309 Red Bird Trace",p:"Emma",bd:4,ba:"2",sf:1573,st:1,g:2,price:267990,pm:2077.66},
+   {a:"2306 Red Bird Trace",p:"Franklin",bd:5,ba:"2.5",sf:1892,st:2,g:2,price:276990,pm:2145.76},
+   {a:"2304 Red Bird Trace",p:"Franklin",bd:5,ba:"2.5",sf:1892,st:2,g:2,price:277990,pm:2153.32},
+   {a:"2317 Red Bird Trace",p:"Barton",bd:3,ba:"2",sf:1280,st:1,g:2,price:277990,pm:2153.32},
+   {a:"2311 Red Bird Trace",p:"Franklin",bd:5,ba:"2.5",sf:1892,st:2,g:2,price:281990,pm:2183.59},
+   {a:"2312 Red Bird Trace",p:"Caprock",bd:3,ba:"2",sf:1434,st:1,g:2,price:282990,pm:2191.15}
+  ]},
+ {id:"pradera", name:"Pradera", city:"Uhland", builder:"Lennar",
+  addr:"Pink Footed Pass & Whoopers Loop, Uhland, TX 78640", lat:29.962, lng:-97.762,
+  drive:"~30 min", isd:"Ask (Uhland area)", specials:"lennar",
+  note:"Lennar's most affordable move-in-ready homes near the Gigafactory, mostly 4-bedroom plans with Lennar's 'Everything's Included' features. Most homes are finished and ready to close.",
+  plans:["Newlin · 3 bed · 1,484 sq ft","Sentosa · 4 bed · 1,575 sq ft","Pinehollow · 4 bed · 1,600 sq ft","Ramsey · 4 bed · 1,676 sq ft","Dowing · 4 bed · 1,859 sq ft","Whitetail · 4 bed · 1,945 sq ft"],
+  homes:[
+   {a:"700 Whoopers Loop",p:"Newlin",bd:3,ba:"2",sf:1484,price:213499,status:"Move-in ready"},
+   {a:"127 Pink Footed Pass",p:"Sentosa",bd:4,ba:"2",sf:1575,price:222749,status:"Move-in ready"},
+   {a:"111 Pink Footed Pass",p:"Pinehollow",bd:4,ba:"2",sf:1600,price:222749,status:"Move-in ready"},
+   {a:"169 Speckled Belly Bend",p:"Ramsey",bd:4,ba:"2",sf:1676,price:225499,status:"Move-in ready"},
+   {a:"732 Whoopers Loop",p:"Ramsey",bd:4,ba:"2",sf:1676,price:226499,status:"Move-in ready"},
+   {a:"178 Pink Footed Pass",p:"Dowing",bd:4,ba:"2",sf:1859,price:231499,status:"Move-in ready"},
+   {a:"137 Spotbill Court",p:"Whitetail",bd:4,ba:"2.5",sf:1945,price:238749,status:"Move-in ready"}
+  ]},
+ {id:"cotton-gateway", name:"Cotton Gateway", city:"Maxwell", builder:"Lennar",
+  addr:"104 Sydney St, Maxwell, TX 78656", lat:29.925, lng:-97.872,
+  drive:"30–35 min", isd:"Ask", specials:"lennar",
+  note:"Lennar advertises this as the only Maxwell community with a low tax rate and quick I-35 access, between Kyle and San Marcos. Pool and park on site.",
+  plans:["Ramsey · 4 bed · 1,667 sq ft","Sentosa · 4 bed · 1,575 sq ft","Pinehollow · 4 bed · 1,600 sq ft","Dowing · 4 bed · 1,850 sq ft"],
+  homes:[
+   {a:"418 Dubai Ave",p:"Ramsey",bd:4,ba:"2",sf:1667,price:213999},
+   {a:"439 Dubai Ave",p:"Sentosa",bd:4,ba:"2",sf:1575,price:222999},
+   {a:"447 Dubai Ave",p:"Pinehollow",bd:4,ba:"2",sf:1600,price:222999},
+   {a:"120 W London Dr",p:"Dowing",bd:4,ba:"2",sf:1850,price:222999}
+  ]},
+ {id:"sunset-oaks", name:"Sunset Oaks", city:"Maxwell", builder:"KB Home",
+  addr:"403 Aurora Dr (Hwy 21 & FM 1966), Maxwell, TX 78656", lat:29.91966, lng:-97.83383,
+  drive:"~35 min", isd:"Lockhart ISD", specials:"kb",
+  note:"KB builds to order here, so you pick the plan, lot and finishes, with delivery in about 4 months. Community park, playground and basketball court. Homes are designed to be ENERGY STAR certified.",
+  plans:["Plan 1243 · 3 bed · from $214,995","Plan 1361 · 3–4 bed · from $223,995","Plan 1605 · 3–4 bed · from $235,995","Plan 1907 · 3–4 bed · from $245,995","Plan 2246 · 4 bed · from $253,995"],
+  homes:[
+   {a:"Plan 1243 (build to order)",p:"Plan 1243",bd:3,ba:"2",sf:1243,g:2,price:214995,from:true,status:"Build to order"},
+   {a:"Plan 1361 (build to order)",p:"Plan 1361",bd:"3–4",ba:"2",sf:1361,g:2,price:223995,from:true,status:"Build to order"},
+   {a:"Plan 1605 (build to order)",p:"Plan 1605",bd:"3–4",ba:"2",sf:1605,g:2,price:235995,from:true,status:"Build to order"},
+   {a:"Plan 1772 (build to order)",p:"Plan 1772",bd:3,ba:"2.5",sf:1772,g:2,price:237995,from:true,status:"Build to order"},
+   {a:"Plan 1907 (build to order)",p:"Plan 1907",bd:"3–4",ba:"2.5",sf:1907,g:2,price:245995,from:true,status:"Build to order"},
+   {a:"Plan 2071 (build to order)",p:"Plan 2071",bd:"3–4",ba:"2.5",sf:2071,g:2,price:250995,from:true,status:"Build to order"},
+   {a:"Plan 2246 (build to order)",p:"Plan 2246",bd:4,ba:"2.5",sf:2246,g:2,price:253995,from:true,status:"Build to order"}
+  ]}
+];
+/* Order by drive time and number the pins */
+(function(){
+  const order=["frontier","durango","prairie-lakes","wayside","pradera","bollinger","cotton-gateway","sunset-oaks","lantana"];
+  C.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
+  C.forEach((c,i)=>{ c.n=i+1;
+    c.homes.forEach(h=>{ if(h.pm==null){ h.est=true; h.pm=estPayment(h.price,0.0499); h.pmMkt=estPayment(h.price,0.071); } });
+  });
+})();
+
+const BUDGET = 2200;
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
+const money2 = n => "$" + n.toLocaleString("en-US",{minimumFractionDigits:0,maximumFractionDigits:0});
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* Projection */
+const W=600,H=877,LATMAX=30.29,LATMIN=29.86,LNGMIN=-97.92,LNGMAX=-97.58;
+const px = (lat,lng) => [ (lng-LNGMIN)/(LNGMAX-LNGMIN)*W, (LATMAX-lat)/(LATMAX-LATMIN)*H ];
+const path = pts => pts.map((p,i)=>{const [x,y]=px(p[0],p[1]);return (i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)}).join(" ");
+
+const I35=[[30.31,-97.73],[30.25,-97.758],[30.20,-97.775],[30.15,-97.79],[30.10,-97.815],[30.05,-97.833],[30.00,-97.865],[29.95,-97.893],[29.90,-97.912],[29.84,-97.935]];
+const SH130=[[30.31,-97.613],[30.25,-97.611],[30.21,-97.62],[30.16,-97.64],[30.11,-97.658],[30.06,-97.673],[30.01,-97.688],[29.96,-97.699],[29.91,-97.706],[29.84,-97.715]];
+const SH45=[[30.118,-97.806],[30.105,-97.76],[30.09,-97.715],[30.078,-97.672]];
+
+const svg = document.getElementById("map");
+let s = "";
+// subtle grid
+for(let i=1;i<6;i++){s+=`<line x1="${i*100}" y1="0" x2="${i*100}" y2="${H}" stroke="var(--line)" stroke-width="1" opacity=".5"/>`}
+for(let i=1;i<9;i++){s+=`<line x1="0" y1="${i*100}" x2="${W}" y2="${i*100}" stroke="var(--line)" stroke-width="1" opacity=".5"/>`}
+// roads
+[SH45,SH130].forEach(r=>{s+=`<path class="road edge" d="${path(r)}"/><path class="road toll" d="${path(r)}"/>`});
+s+=`<path class="road edge" d="${path(I35)}"/><path class="road main" d="${path(I35)}"/>`;
+// shields
+function ishield(lat,lng,label){const [x,y]=px(lat,lng);return `<g transform="translate(${x-14},${y-14})"><path class="shield-i" d="M2 2h24v12c0 7-6 11-12 13C8 25 2 21 2 14z"/><text class="shield-txt" x="14" y="17" text-anchor="middle">${label}</text></g>`}
+function tshield(lat,lng,label){const [x,y]=px(lat,lng);return `<g transform="translate(${x-16},${y-10})"><rect class="shield-t" x="0" y="0" width="32" height="20" rx="4"/><text class="shield-ttxt" x="16" y="14" text-anchor="middle">${label}</text></g>`}
+s+=ishield(30.17,-97.785,"35")+ishield(29.97,-97.88,"35")+tshield(30.14,-97.648,"130")+tshield(29.99,-97.692,"130")+tshield(30.108,-97.775,"45");
+// towns
+[["Downtown Austin",30.267,-97.743,"start"],["Buda",30.085,-97.840,"start"],["Kyle",29.989,-97.877,"start"],["Lockhart",29.885,-97.670,"end"],["Airport",30.197,-97.666,"end"]].forEach(t=>{
+  const [x,y]=px(t[1],t[2]); const dx = t[3]==="end"?-8:8;
+  s+=`<circle class="town-dot" cx="${x}" cy="${y}" r="4"/><text class="town" x="${x+dx}" y="${y+5}" text-anchor="${t[3]}">${t[0]}</text>`;
+});
+// Giga Texas
+{const [x,y]=px(30.222,-97.617);
+ const star=(cx,cy,r)=>{let p="";for(let i=0;i<10;i++){const a=Math.PI/5*i-Math.PI/2,rr=i%2?r*.45:r;p+=(i?"L":"M")+(cx+rr*Math.cos(a)).toFixed(1)+" "+(cy+rr*Math.sin(a)).toFixed(1)}return p+"Z"};
+ s+=`<path class="giga" d="${star(x,y,13)}"/><text class="giga-txt" x="${x-16}" y="${y+5}" text-anchor="end">Tesla Giga Texas</text>`;}
+// pins
+C.forEach(c=>{const [x,y]=px(c.lat,c.lng);
+  s+=`<g class="pin" id="pin-${c.id}" data-id="${c.id}" tabindex="0" role="button" aria-label="${esc(c.name)}, ${esc(c.city)}"><circle cx="${x}" cy="${y}" r="16"/><text x="${x}" y="${y+5}" text-anchor="middle">${c.n}</text></g>`;});
+svg.innerHTML = s;
+
+/* List */
+const list = document.getElementById("clist");
+list.innerHTML = C.map(c=>{
+  const minP = Math.min(...c.homes.map(h=>h.price)), minM = Math.min(...c.homes.map(h=>h.pm));
+  return `<button class="ccard" id="card-${c.id}" data-id="${c.id}" type="button">
+    <span class="badge">${c.n}</span>
+    <span><h3>${esc(c.name)}</h3><span class="meta">${esc(c.city)} · ${esc(c.drive)} to Giga · ${esc(c.isd)}</span></span>
+    <span class="from num">from<b>${money(minP)}</b>${money(minM)}/mo</span>
+  </button>`}).join("");
+
+/* Popup */
+const pop = document.getElementById("pop"), mapbox = document.getElementById("mapbox");
+let current = null;
+function select(id){
+  const c = C.find(x=>x.id===id); if(!c) return;
+  current = id;
+  document.querySelectorAll(".pin,.ccard").forEach(el=>el.classList.toggle("on", el.dataset.id===id));
+  const minP = Math.min(...c.homes.map(h=>h.price)), minM = Math.min(...c.homes.map(h=>h.pm));
+  const fits = c.homes.filter(h=>h.pm<=BUDGET).length;
+  pop.innerHTML = `<button class="x" type="button" aria-label="Close">×</button>
+    <h3>${esc(c.name)}</h3><div class="sub">${esc(c.city)} · ${esc(c.builder)}</div>
+    <dl class="num"><dt>Homes from</dt><dd>${money(minP)}</dd><dt>Est. payment from</dt><dd>${money(minM)}/mo</dd>
+    <dt>In budget</dt><dd>${fits} of ${c.homes.length} homes</dd><dt>Drive to Giga</dt><dd>${esc(c.drive)}</dd></dl>
+    <button class="btn" type="button" data-open="${c.id}">See homes &amp; specials →</button>`;
+  pop.hidden = false;
+  const [x,y] = px(c.lat,c.lng);
+  const r = mapbox.getBoundingClientRect(), sc = r.width/W;
+  const pw = pop.offsetWidth, ph = pop.offsetHeight;
+  let left = x*sc - pw/2, top = y*sc - ph - 24;
+  if (top < 8) top = y*sc + 24;
+  left = Math.max(8, Math.min(left, r.width - pw - 8));
+  top = Math.max(8, Math.min(top, r.height - ph - 8));
+  pop.style.left = left+"px"; pop.style.top = top+"px";
+}
+function closePop(){pop.hidden = true; current=null; document.querySelectorAll(".pin.on,.ccard.on").forEach(el=>el.classList.remove("on"))}
+
+svg.addEventListener("click", e=>{const g=e.target.closest(".pin"); if(g) select(g.dataset.id)});
+svg.addEventListener("keydown", e=>{const g=e.target.closest(".pin"); if(g && (e.key==="Enter"||e.key===" ")){e.preventDefault(); select(g.dataset.id)}});
+list.addEventListener("click", e=>{const b=e.target.closest(".ccard"); if(b) go(b.dataset.id)});
+pop.addEventListener("click", e=>{
+  if(e.target.closest(".x")) return closePop();
+  const o = e.target.closest("[data-open]"); if(o) go(o.dataset.open);
+});
+window.addEventListener("resize", ()=>{ if(current && !pop.hidden) select(current) });
+
+/* Detail view */
+const mapView = document.getElementById("mapView"), detail = document.getElementById("detailView");
+function renderDetail(c){
+  const sp = (SPECIALS[c.specials]||[]).map(x=>`<div class="special"><span class="tag">${esc(x.tag)}</span><h3>${esc(x.title)}</h3><p>${esc(x.text)}</p></div>`).join("");
+  const homes = c.homes.slice().sort((a,b)=>a.pm-b.pm).map(h=>{
+    const inB = h.pm<=BUDGET;
+    return `<article class="home">
+      <span class="fit ${inB?"in":"st"}">${h.pm<2000?"Under budget":inB?"In budget":"Slight stretch"}</span>
+      <div><div class="plan">${esc(/^Plan /.test(h.p)?h.p:h.p+" plan")}${h.status?" · "+esc(h.status):""}</div><h3>${esc(h.a)}</h3>
+      <div class="spec num">${[h.bd+" bed", h.ba+" bath", h.sf.toLocaleString("en-US")+" sq ft", h.st?h.st+"-story":"", h.g?h.g+"-car garage":""].filter(Boolean).join(" · ")}</div></div>
+      <div class="price num"><b>${h.from?"From ":""}${money(h.price)}</b>${h.was?`<span class="was">was ${money(h.was)}</span>`:""}</div>
+      <dl class="rows num">
+        ${h.est
+          ? `<dt>Sam's est. with a ~5% builder rate</dt><dd class="pmt">${money(h.pm)}</dd><dt>Sam's est. at today's rates (~7.1%)</dt><dd>${money(h.pmMkt)}</dd>`
+          : `<dt>Builder's est. payment</dt><dd class="pmt">${money(h.pm)}</dd>`}
+        <dt>Down payment (3.5%)</dt><dd>${money(h.price*0.035)}</dd>
+      </dl>
+    </article>`}).join("");
+  detail.innerHTML = `<button class="back" type="button" id="backBtn">← Back to map</button>
+    <div class="dhead"><div><div class="eyebrow">${esc(c.builder)} · ${esc(c.city)}</div><h2>${esc(c.name)}</h2><div class="addr">${esc(c.addr)}</div></div>
+      <div class="facts"><span class="chip">Drive to Giga <b>${esc(c.drive)}</b></span><span class="chip">Schools <b>${esc(c.isd)}</b></span><span class="chip">Homes listed <b>${c.homes.length}</b></span></div></div>
+    ${sp}
+    <p class="note">${esc(c.note)}</p>
+    <h3 style="font-size:20px;margin-bottom:10px">Floor plans that fit the budget</h3>
+    <div class="plans">${c.plans.map(p=>`<span class="chip">${esc(p)}</span>`).join("")}</div>
+    <h3 style="font-size:20px;margin-bottom:10px">Homes for sale now</h3>
+    <div class="homes">${homes}</div>`;
+  document.getElementById("backBtn").addEventListener("click", ()=>{ if(location.hash){history.back()} else show(null) });
+}
+function show(id){
+  const c = C.find(x=>x.id===id);
+  if(c){ renderDetail(c); mapView.hidden = true; detail.hidden = false; closePop(); window.scrollTo(0,0); }
+  else { detail.hidden = true; mapView.hidden = false; }
+}
+function go(id){ if(location.hash !== "#"+id){ location.hash = id } else show(id) }
+window.addEventListener("hashchange", ()=>show(location.hash.slice(1)||null));
+show(location.hash.slice(1)||null);
+})();
+</script>
