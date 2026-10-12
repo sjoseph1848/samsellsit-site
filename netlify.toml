@@ -26,11 +26,6 @@
   status = 200
 
 [[redirects]]
-  from = "/rent"
-  to = "/#rent"
-  status = 302
-
-[[redirects]]
   from = "/buy"
   to = "/#buy"
   status = 302
