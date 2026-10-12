@@ -200,7 +200,7 @@ button{font:inherit;color:inherit}
   <section id="mapView" aria-label="Map of communities">
     <div class="layout">
       <div class="mapbox" id="mapbox">
-        <svg id="map" viewBox="0 0 600 877" role="img" aria-label="Map of new home communities south and southeast of Austin"></svg>
+        <svg id="map" viewBox="0 0 600 637" role="img" aria-label="Map of new home communities around Austin, from Elgin and Manor to Lockhart"></svg>
         <div class="maplegend">
           <span><span class="sw" style="background:var(--road);outline:1px solid var(--road-edge)"></span>Interstate</span>
           <span><span class="sw" style="background:var(--toll)"></span>Toll road</span>
@@ -250,6 +250,10 @@ const SPECIALS = {
     {tag:"Sales event", title:"Lennar Fall Super Sale",
      text:"Lennar is running a Fall Super Sale on these homes. Lennar's rate specials and closing-cost help change often (recent ones included a 3.99% FHA fixed rate) and require financing with Lennar Mortgage. I'll confirm the current terms before you tour."}
   ],
+  brohn: [
+    {tag:"Ask first", title:"Builder incentives not posted",
+     text:"Brohn Homes doesn't list a current rate special or closing-cost offer for Harvest Ridge online. I'll ask what they'll put toward closing costs and rate buydowns before you tour."}
+  ],
   kb: [
     {tag:"Rate special", title:"4.99% FHA 5/1 ARM (5.781% APR), sign by Oct 31",
      text:"Financing with KBHS Home Loans. Includes a $5,000 closing-cost credit. Heads up: this is an adjustable rate. It's fixed for 5 years, then can adjust each year (KB's own example rises to 6.43% in year 6)."},
@@ -258,10 +262,10 @@ const SPECIALS = {
   ]
 };
 const EST = {tax:0.025, ins:110, hoa:50, mip:0.0055, ufmip:0.0175};
-function estPayment(price, rate){
+function estPayment(price, rate, hoa){
   const loan = price*0.965*(1+EST.ufmip), r = rate/12, n = 360;
   const pi = loan*r/(1-Math.pow(1+r,-n));
-  return pi + loan*EST.mip/12 + price*EST.tax/12 + EST.ins + EST.hoa;
+  return pi + loan*EST.mip/12 + price*EST.tax/12 + EST.ins + (hoa==null?EST.hoa:hoa);
 }
 
 const C = [
@@ -361,6 +365,48 @@ const C = [
    {a:"447 Dubai Ave",p:"Pinehollow",bd:4,ba:"2",sf:1600,price:222999},
    {a:"120 W London Dr",p:"Dowing",bd:4,ba:"2",sf:1850,price:222999}
   ]},
+ {id:"palomino", name:"Palomino", city:"Manor", builder:"D.R. Horton",
+  addr:"14825 B Afleet Alex St, Manor, TX 78653", lat:30.362, lng:-97.548,
+  drive:"20–25 min", isd:"Manor ISD", specials:"austin",
+  note:"The only new construction in Manor near this budget. These are townhome-style homes on A/B lots (two homes share a wall), so they're attached, not stand-alone houses. Everything else new in Manor starts around $280K and up. HOA not posted yet, so the estimate uses $50/mo.",
+  plans:["Willow · 3 bed · 1,310 sq ft · from $257,490","Magnolia · 3 bed · 1,557 sq ft · from $279,490","Cypress · 3 bed · 1,690 sq ft · from $290,490"],
+  homes:[
+   {a:"15013 A Afleet Alex St",p:"Willow",bd:3,ba:"2",sf:1310,price:257490,status:"Under construction"},
+   {a:"15013 B Afleet Alex St",p:"Willow",bd:3,ba:"2",sf:1310,price:257490,status:"Under construction"}
+  ]},
+ {id:"elm-creek", name:"Elm Creek", city:"Elgin", builder:"Lennar",
+  addr:"23816 Tiny Moons Way (Welcome Center), Elgin, TX 78621", lat:30.343, lng:-97.405, hoa:55,
+  drive:"30–35 min", isd:"Elgin ISD", specials:"lennar",
+  note:"Lennar's master-planned community just west of Elgin off US-290. The 4-bedroom homes fit the budget here, several of them already move-in ready. HOA is about $55/mo. The drive to the Gigafactory runs west on 290, then south on SH-130.",
+  plans:["Kitson · 3 bed · 1,402 sq ft","Idlewood · 3 bed · 1,411 sq ft","Newlin · 3 bed · 1,474 sq ft","Sentosa · 4 bed · 1,575 sq ft","Pinehollow · 4 bed · 1,600 sq ft","Ramsey · 4 bed · 1,667 sq ft","Morrow · 4 bed · 1,867 sq ft","Barlow · 4 bed · 2,173 sq ft"],
+  homes:[
+   {a:"13309 Painted Night Rd",p:"Idlewood",bd:3,ba:"2",sf:1411,price:210999,status:"Move-in ready"},
+   {a:"13305 Painted Night Rd",p:"Kitson",bd:3,ba:"2",sf:1402,price:210999,status:"Move-in ready"},
+   {a:"23525 Firelight Dr",p:"Kitson",bd:3,ba:"2",sf:1402,price:217999,status:"Under construction"},
+   {a:"23601 Firelight Dr",p:"Idlewood",bd:3,ba:"2",sf:1411,price:217999,status:"Under construction"},
+   {a:"23609 Firelight Dr",p:"Sentosa",bd:4,ba:"2",sf:1575,price:225999,status:"Under construction"},
+   {a:"23709 Grackle Cv",p:"Pinehollow",bd:4,ba:"2",sf:1600,price:227999,status:"Under construction"},
+   {a:"23900 Stagg St",p:"Newlin",bd:3,ba:"2",sf:1474,price:231999,status:"Move-in ready"},
+   {a:"23724 Glowing Embers Dr",p:"Newlin",bd:3,ba:"2",sf:1474,price:232999,status:"Move-in ready"},
+   {a:"23800 Glowing Embers Dr",p:"Ramsey",bd:4,ba:"2",sf:1667,price:232999,status:"Move-in ready"},
+   {a:"23705 Grackle Cv",p:"Morrow",bd:4,ba:"2.5",sf:1867,price:236999,status:"Under construction"},
+   {a:"23617 Firelight Dr",p:"Morrow",bd:4,ba:"2.5",sf:1867,price:239999,status:"Under construction"},
+   {a:"23717 Grackle Cv",p:"Barlow",bd:4,ba:"2.5",sf:2173,price:244999,status:"Under construction"}
+  ]},
+ {id:"harvest-ridge", name:"Harvest Ridge", city:"Elgin", builder:"Brohn Homes",
+  addr:"103 Roost Rd (sales office), Elgin, TX 78621", lat:30.352, lng:-97.355, hoa:70,
+  drive:"35–40 min", isd:"Elgin ISD", specials:"brohn",
+  note:"The lowest prices on this page, from a local Austin builder. The homes are smaller and closer together, and an elementary school is being built on site. It sits on the east side of Elgin, so it's the longest drive of the north-side options. HOA is about $70/mo.",
+  plans:["1072 · 2 bed · 1,072 sq ft","1105 · 2 bed · 1,105 sq ft","1153 · 3 bed · 1,153 sq ft","1191 · 3 bed · 1,191 sq ft","1419 · 3 bed · 1,419 sq ft","1501 · 3 bed · 1,501 sq ft"],
+  homes:[
+   {a:"220 Winnowing Ln",p:"Harvest Ridge 1072",bd:2,ba:"2.5",sf:1072,price:179990,status:"Move-in ready"},
+   {a:"224 Winnowing Ln",p:"Harvest Ridge 1153",bd:3,ba:"2.5",sf:1153,price:192960,status:"Under construction"},
+   {a:"179 Cider Creek Dr",p:"Harvest Ridge 1105",bd:2,ba:"2",sf:1105,price:199990,status:"Move-in ready"},
+   {a:"157 Daylily Dr",p:"Harvest Ridge 1191",bd:3,ba:"2",sf:1191,price:211840,status:"Move-in ready"},
+   {a:"191 Cider Creek Dr",p:"Harvest Ridge 1419",bd:3,ba:"2.5",sf:1419,price:246160,status:"Move-in ready"},
+   {a:"165 Daylily Dr",p:"Harvest Ridge 1501",bd:3,ba:"2.5",sf:1501,price:246260,status:"Move-in ready"},
+   {a:"175 Cider Creek Dr",p:"Harvest Ridge 1501",bd:3,ba:"2.5",sf:1501,price:247270,status:"Move-in ready"}
+  ]},
  {id:"sunset-oaks", name:"Sunset Oaks", city:"Maxwell", builder:"KB Home",
   addr:"403 Aurora Dr (Hwy 21 & FM 1966), Maxwell, TX 78656", lat:29.91966, lng:-97.83383,
   drive:"~35 min", isd:"Lockhart ISD", specials:"kb",
@@ -378,10 +424,10 @@ const C = [
 ];
 /* Order by drive time and number the pins */
 (function(){
-  const order=["frontier","durango","prairie-lakes","wayside","pradera","bollinger","cotton-gateway","sunset-oaks","lantana"];
+  const order=["frontier","durango","palomino","prairie-lakes","wayside","pradera","elm-creek","bollinger","cotton-gateway","harvest-ridge","sunset-oaks","lantana"];
   C.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));
   C.forEach((c,i)=>{ c.n=i+1;
-    c.homes.forEach(h=>{ if(h.pm==null){ h.est=true; h.pm=estPayment(h.price,0.0499); h.pmMkt=estPayment(h.price,0.071); } });
+    c.homes.forEach(h=>{ if(h.pm==null){ h.est=true; h.pm=estPayment(h.price,0.0499,c.hoa); h.pmMkt=estPayment(h.price,0.071,c.hoa); } });
   });
 })();
 
@@ -391,12 +437,13 @@ const money2 = n => "$" + n.toLocaleString("en-US",{minimumFractionDigits:0,maxi
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* Projection */
-const W=600,H=877,LATMAX=30.29,LATMIN=29.86,LNGMIN=-97.92,LNGMAX=-97.58;
+const W=600,H=637,LATMAX=30.43,LATMIN=29.86,LNGMIN=-97.92,LNGMAX=-97.30;
 const px = (lat,lng) => [ (lng-LNGMIN)/(LNGMAX-LNGMIN)*W, (LATMAX-lat)/(LATMAX-LATMIN)*H ];
 const path = pts => pts.map((p,i)=>{const [x,y]=px(p[0],p[1]);return (i?"L":"M")+x.toFixed(1)+" "+y.toFixed(1)}).join(" ");
 
 const I35=[[30.31,-97.73],[30.25,-97.758],[30.20,-97.775],[30.15,-97.79],[30.10,-97.815],[30.05,-97.833],[30.00,-97.865],[29.95,-97.893],[29.90,-97.912],[29.84,-97.935]];
-const SH130=[[30.31,-97.613],[30.25,-97.611],[30.21,-97.62],[30.16,-97.64],[30.11,-97.658],[30.06,-97.673],[30.01,-97.688],[29.96,-97.699],[29.91,-97.706],[29.84,-97.715]];
+const SH130=[[30.43,-97.62],[30.36,-97.612],[30.31,-97.613],[30.25,-97.611],[30.21,-97.62],[30.16,-97.64],[30.11,-97.658],[30.06,-97.673],[30.01,-97.688],[29.96,-97.699],[29.91,-97.706],[29.84,-97.715]];
+const US290=[[30.33,-97.70],[30.335,-97.62],[30.343,-97.556],[30.345,-97.48],[30.348,-97.40],[30.35,-97.33]];
 const SH45=[[30.118,-97.806],[30.105,-97.76],[30.09,-97.715],[30.078,-97.672]];
 
 const svg = document.getElementById("map");
@@ -406,13 +453,13 @@ for(let i=1;i<6;i++){s+=`<line x1="${i*100}" y1="0" x2="${i*100}" y2="${H}" stro
 for(let i=1;i<9;i++){s+=`<line x1="0" y1="${i*100}" x2="${W}" y2="${i*100}" stroke="var(--line)" stroke-width="1" opacity=".5"/>`}
 // roads
 [SH45,SH130].forEach(r=>{s+=`<path class="road edge" d="${path(r)}"/><path class="road toll" d="${path(r)}"/>`});
-s+=`<path class="road edge" d="${path(I35)}"/><path class="road main" d="${path(I35)}"/>`;
+[I35,US290].forEach(r=>{s+=`<path class="road edge" d="${path(r)}"/><path class="road main" d="${path(r)}"/>`});
 // shields
 function ishield(lat,lng,label){const [x,y]=px(lat,lng);return `<g transform="translate(${x-14},${y-14})"><path class="shield-i" d="M2 2h24v12c0 7-6 11-12 13C8 25 2 21 2 14z"/><text class="shield-txt" x="14" y="17" text-anchor="middle">${label}</text></g>`}
 function tshield(lat,lng,label){const [x,y]=px(lat,lng);return `<g transform="translate(${x-16},${y-10})"><rect class="shield-t" x="0" y="0" width="32" height="20" rx="4"/><text class="shield-ttxt" x="16" y="14" text-anchor="middle">${label}</text></g>`}
-s+=ishield(30.17,-97.785,"35")+ishield(29.97,-97.88,"35")+tshield(30.14,-97.648,"130")+tshield(29.99,-97.692,"130")+tshield(30.108,-97.775,"45");
+s+=ishield(30.17,-97.785,"35")+ishield(29.97,-97.88,"35")+tshield(30.14,-97.648,"130")+tshield(29.99,-97.692,"130")+tshield(30.108,-97.775,"45")+tshield(30.33,-97.47,"290")+tshield(30.30,-97.61,"130");
 // towns
-[["Downtown Austin",30.267,-97.743,"start"],["Buda",30.085,-97.840,"start"],["Kyle",29.989,-97.877,"start"],["Lockhart",29.885,-97.670,"end"],["Airport",30.197,-97.666,"end"]].forEach(t=>{
+[["Downtown Austin",30.267,-97.743,"start"],["Buda",30.085,-97.840,"start"],["Kyle",29.989,-97.877,"start"],["Lockhart",29.885,-97.670,"end"],["Airport",30.197,-97.666,"end"],["Manor",30.343,-97.556,"start"],["Elgin",30.322,-97.372,"start"]].forEach(t=>{
   const [x,y]=px(t[1],t[2]); const dx = t[3]==="end"?-8:8;
   s+=`<circle class="town-dot" cx="${x}" cy="${y}" r="4"/><text class="town" x="${x+dx}" y="${y+5}" text-anchor="${t[3]}">${t[0]}</text>`;
 });
