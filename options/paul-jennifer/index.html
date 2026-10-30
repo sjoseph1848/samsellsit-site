@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Jennifer &amp; Paul's Shortlist</title>
 <meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -172,7 +173,7 @@ button{font:inherit;color:inherit}
       <a class="wordmark" href="/">SAM <span>SELLS</span> IT</a>
       <small>Prepared by Sam Joseph, REALTOR® · Spirit Real Estate Group</small>
     </div>
-    <div class="eyebrow">Private shortlist · Prepared October 12, 2026</div>
+    <div class="eyebrow">Private shortlist · Lennar listings updated October 30, 2026</div>
     <h1>Jennifer &amp; Paul's<br>New-Home Shortlist</h1>
     <div class="rule"></div>
     <p>New construction along SH-130 that fits a payment around $2,000–$2,200 a month, sorted by the drive to Giga Texas. Tap a pin or a community to see the homes for sale, the builder specials, and estimated monthly payments.</p>
@@ -219,7 +220,7 @@ button{font:inherit;color:inherit}
   <section id="detailView" hidden aria-live="polite"></section>
 
   <footer class="fine">
-    <p>Prices, specials and estimated monthly payments come from the builders' websites as of October 12, 2026, and can change or sell at any time. For D.R. Horton homes, payments are the builder's own estimates (principal, interest, taxes, insurance, mortgage insurance and HOA) and assume its current special rate; without the special, expect roughly $300–$350 more per month. For Lennar and KB Home, payments are my own estimates on a 30-year FHA loan with 3.5% down, assuming a 2.5% property tax rate, $110/month insurance and $50/month HOA; actual tax rates and HOA dues vary by community. KB prices are base prices before homesite premiums and options. Specials require financing with the builder's affiliated lender and have deadlines.</p>
+    <p>Cotton Gateway and Pradera prices and availability were checked on Lennar on October 30, 2026. Other listings and specials were last checked October 12, 2026. Prices, specials and estimated monthly payments can change, and homes may sell at any time. For D.R. Horton homes, payments are the builder's own estimates (principal, interest, taxes, insurance, mortgage insurance and HOA) and assume its current special rate; without the special, expect roughly $300–$350 more per month. For Lennar and KB Home, payments are my own estimates on a 30-year FHA loan with 3.5% down, assuming a 2.5% property tax rate, $110/month insurance and $50/month HOA; actual tax rates and HOA dues vary by community. KB prices are base prices before homesite premiums and options. Specials require financing with the builder's affiliated lender and have deadlines.</p>
     <p>Down payments shown are 3.5% of the price. Closing costs, prepaid taxes and insurance, and escrow deposits are extra unless a builder special covers them. Drive times are rough estimates without traffic; check them at your actual shift times. D.R. Horton plan names are matched by square footage, and the Lennar Pradera and Cotton Gateway pins are placed approximately. This page is not a loan offer.</p>
   </footer>
 </div>
@@ -232,6 +233,7 @@ button{font:inherit;color:inherit}
 <script>
 (function(){
 const SPECIALS = {
+  "lennar-updated": [{tag:"Confirm incentives", title:"Ask about current builder offers", text:"Prices and availability below were checked on Lennar on October 30, 2026. Rate buydowns and closing-cost offers depend on the home, lender and contract terms. The payment scenarios below are estimates, not a confirmed financing offer."}],
   austin: [
     {tag:"Rate special", title:"4.99% FHA fixed rate (5.697% APR) with 3.5% down",
      text:"Available on select D.R. Horton homes. Contract on or after Aug 27 and close by Oct 30, 2026. Requires financing with DHI Mortgage, and points may be needed to get the advertised rate."},
@@ -348,29 +350,358 @@ const C = [
   ]},
  {id:"pradera", name:"Pradera", city:"Uhland", builder:"Lennar",
   addr:"Pink Footed Pass & Whoopers Loop, Uhland, TX 78640", lat:29.962, lng:-97.762,
-  drive:"~30 min", isd:"Ask (Uhland area)", specials:"lennar",
-  note:"Lennar's most affordable move-in-ready homes near the Gigafactory, mostly 4-bedroom plans with Lennar's 'Everything's Included' features. Most homes are finished and ready to close.",
-  plans:["Newlin · 3 bed · 1,484 sq ft","Sentosa · 4 bed · 1,575 sq ft","Pinehollow · 4 bed · 1,600 sq ft","Ramsey · 4 bed · 1,676 sq ft","Dowing · 4 bed · 1,859 sq ft","Whitetail · 4 bed · 1,945 sq ft"],
+  drive:"~30 min", isd:"Ask (Uhland area)", specials:"lennar-updated",
+  note:"Available homes checked on Lennar on October 30, 2026. Move-in-ready and under-construction homes are labeled individually. Confirm the completion date before planning your move.",
+  plans:["Idlewood · 3 bed · 1,411 sq ft", "Newlin · 3 bed · 1,484 sq ft", "Sentosa · 4 bed · 1,575 sq ft", "Pinehollow · 4 bed · 1,600 sq ft", "Dowing · 4 bed · 1,859 sq ft", "Ramsey · 4 bed · 1,676 sq ft", "Morrow · 4 bed · 1,867 sq ft", "Littleton · 4 bed · 1,922 sq ft", "Sherman · 4 bed · 2,193 sq ft"],
   homes:[
-   {a:"700 Whoopers Loop",p:"Newlin",bd:3,ba:"2",sf:1484,price:213499,status:"Move-in ready"},
-   {a:"127 Pink Footed Pass",p:"Sentosa",bd:4,ba:"2",sf:1575,price:222749,status:"Move-in ready"},
-   {a:"111 Pink Footed Pass",p:"Pinehollow",bd:4,ba:"2",sf:1600,price:222749,status:"Move-in ready"},
-   {a:"169 Speckled Belly Bend",p:"Ramsey",bd:4,ba:"2",sf:1676,price:225499,status:"Move-in ready"},
-   {a:"732 Whoopers Loop",p:"Ramsey",bd:4,ba:"2",sf:1676,price:226499,status:"Move-in ready"},
-   {a:"178 Pink Footed Pass",p:"Dowing",bd:4,ba:"2",sf:1859,price:231499,status:"Move-in ready"},
-   {a:"137 Spotbill Court",p:"Whitetail",bd:4,ba:"2.5",sf:1945,price:238749,status:"Move-in ready"}
-  ]},
+  {
+    "a": "228 Black Scoter Pass",
+    "p": "Idlewood",
+    "bd": 3,
+    "ba": "2",
+    "sf": 1411,
+    "price": 212749,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/cottage-collection/idlewood/14834522h84"
+  },
+  {
+    "a": "118 Pink Footed Pass",
+    "p": "Newlin",
+    "bd": 3,
+    "ba": "2",
+    "sf": 1484,
+    "price": 220499,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/newlin/14835542k02"
+  },
+  {
+    "a": "127 Pink Footed Pass",
+    "p": "Sentosa",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1575,
+    "price": 222749,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/cottage-collection/sentosa/14834522c49"
+  },
+  {
+    "a": "772 Whoopers Loop",
+    "p": "Newlin",
+    "bd": 3,
+    "ba": "2",
+    "sf": 1484,
+    "price": 227499,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/newlin/14835542k28"
+  },
+  {
+    "a": "252 Black Scoter Pass",
+    "p": "Pinehollow",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1600,
+    "price": 227749,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/cottage-collection/pinehollow/14834522h81"
+  },
+  {
+    "a": "178 Pink Footed Pass",
+    "p": "Dowing",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1859,
+    "price": 238499,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/dowing/14835542k10"
+  },
+  {
+    "a": "175 Speckled Belly Bend",
+    "p": "Ramsey",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1676,
+    "price": 241499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/ramsey/14835542e22"
+  },
+  {
+    "a": "756 Whoopers Loop",
+    "p": "Ramsey",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1676,
+    "price": 242499,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/ramsey/14835542k26"
+  },
+  {
+    "a": "167 Black Scoter Pass",
+    "p": "Ramsey",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1676,
+    "price": 242499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/ramsey/14835542c53"
+  },
+  {
+    "a": "143 Black Scoter Pass",
+    "p": "Ramsey",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1676,
+    "price": 243499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/ramsey/14835542c56"
+  },
+  {
+    "a": "244 Black Scoter Pass",
+    "p": "Morrow",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 1867,
+    "price": 244749,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/cottage-collection/morrow/14834522h82"
+  },
+  {
+    "a": "129 Black Scoter Pass",
+    "p": "Littleton",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 1922,
+    "price": 254499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/littleton/14835542c57"
+  },
+  {
+    "a": "764 Whoopers Loop",
+    "p": "Sherman",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 2193,
+    "price": 265499,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/uhland/pradera/watermill-collection/sherman/14835542k27"
+  }
+]},
  {id:"cotton-gateway", name:"Cotton Gateway", city:"Maxwell", builder:"Lennar",
   addr:"104 Sydney St, Maxwell, TX 78656", lat:29.925, lng:-97.872,
-  drive:"30–35 min", isd:"Ask", specials:"lennar",
-  note:"Lennar advertises this as the only Maxwell community with a low tax rate and quick I-35 access, between Kyle and San Marcos. Pool and park on site.",
-  plans:["Ramsey · 4 bed · 1,667 sq ft","Sentosa · 4 bed · 1,575 sq ft","Pinehollow · 4 bed · 1,600 sq ft","Dowing · 4 bed · 1,850 sq ft"],
+  drive:"30–35 min", isd:"Ask", specials:"lennar-updated",
+  note:"Lennar advertises this as the only Maxwell community with a low tax rate and quick I-35 access, between Kyle and San Marcos. Pool and park on site. Availability checked October 30, 2026; each home is labeled with its current construction status.",
+  plans:["Kitson · 3 bed · 1,402 sq ft", "Idlewood · 3 bed · 1,411 sq ft", "Sentosa · 4 bed · 1,575 sq ft", "Pinehollow · 4 bed · 1,600 sq ft", "Newlin · 3 bed · 1,474 sq ft", "Ramsey · 4 bed · 1,667 sq ft", "Morrow · 4 bed · 1,867 sq ft", "Barlow · 4 bed · 2,173 sq ft", "Dowing · 4 bed · 1,850 sq ft", "Littleton · 4 bed · 1,891 sq ft", "Sherman · 4 bed · 2,162 sq ft"],
   homes:[
-   {a:"418 Dubai Ave",p:"Ramsey",bd:4,ba:"2",sf:1667,price:213999},
-   {a:"439 Dubai Ave",p:"Sentosa",bd:4,ba:"2",sf:1575,price:222999},
-   {a:"447 Dubai Ave",p:"Pinehollow",bd:4,ba:"2",sf:1600,price:222999},
-   {a:"120 W London Dr",p:"Dowing",bd:4,ba:"2",sf:1850,price:222999}
-  ]},
+  {
+    "a": "451 Dubai Avenue",
+    "p": "Kitson",
+    "bd": 3,
+    "ba": "2",
+    "sf": 1402,
+    "price": 203999,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/kitson/41017521l15"
+  },
+  {
+    "a": "503 Dubai Avenue",
+    "p": "Idlewood",
+    "bd": 3,
+    "ba": "2",
+    "sf": 1411,
+    "price": 211999,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/idlewood/41017521m02"
+  },
+  {
+    "a": "439 Dubai Avenue",
+    "p": "Sentosa",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1575,
+    "price": 213999,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/sentosa/41017521l12"
+  },
+  {
+    "a": "447 Dubai Avenue",
+    "p": "Pinehollow",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1600,
+    "price": 213999,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/pinehollow/41017521l14"
+  },
+  {
+    "a": "454 Dubai Avenue",
+    "p": "Sentosa",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1575,
+    "price": 214999,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/sentosa/41017521n15"
+  },
+  {
+    "a": "469 Dubai Avenue",
+    "p": "Sentosa",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1575,
+    "price": 214999,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/sentosa/41017521l20"
+  },
+  {
+    "a": "455 Dubai Avenue",
+    "p": "Sentosa",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1575,
+    "price": 215999,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/sentosa/41017521l16"
+  },
+  {
+    "a": "463 Dubai Avenue",
+    "p": "Pinehollow",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1600,
+    "price": 215999,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/pinehollow/41017521l18"
+  },
+  {
+    "a": "541 Dubai Avenue",
+    "p": "Newlin",
+    "bd": 3,
+    "ba": "2",
+    "sf": 1474,
+    "price": 218499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/newlin/41018511m12"
+  },
+  {
+    "a": "446 Dubai Avenue",
+    "p": "Pinehollow",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1600,
+    "price": 218999,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/pinehollow/41017521n13"
+  },
+  {
+    "a": "533 Dubai Avenue",
+    "p": "Ramsey",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1667,
+    "price": 229499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/ramsey/41018511m10"
+  },
+  {
+    "a": "467 Dubai Avenue",
+    "p": "Morrow",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 1867,
+    "price": 231999,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/morrow/41017521l19"
+  },
+  {
+    "a": "443 Dubai Avenue",
+    "p": "Barlow",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 2173,
+    "price": 236999,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/barlow/41017521l13"
+  },
+  {
+    "a": "431 Dubai Avenue",
+    "p": "Dowing",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1850,
+    "price": 238499,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/dowing/41018511l10"
+  },
+  {
+    "a": "545 Dubai Avenue",
+    "p": "Dowing",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1850,
+    "price": 238499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/dowing/41018511m13"
+  },
+  {
+    "a": "529 Dubai Avenue",
+    "p": "Dowing",
+    "bd": 4,
+    "ba": "2",
+    "sf": 1850,
+    "price": 239499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/dowing/41018511m09"
+  },
+  {
+    "a": "450 Dubai Avenue",
+    "p": "Barlow",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 2173,
+    "price": 241999,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/cottage-collection/barlow/41017521n14"
+  },
+  {
+    "a": "419 Dubai Avenue",
+    "p": "Littleton",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 1891,
+    "price": 242499,
+    "status": "Move-in ready",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/littleton/41018511l07"
+  },
+  {
+    "a": "537 Dubai Avenue",
+    "p": "Sherman",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 2162,
+    "price": 246499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/sherman/41018511m11"
+  },
+  {
+    "a": "435 Dubai Avenue",
+    "p": "Sherman",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 2162,
+    "price": 246499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/sherman/41018511l11"
+  },
+  {
+    "a": "426 Dubai Avenue",
+    "p": "Sherman",
+    "bd": 4,
+    "ba": "2.5",
+    "sf": 2162,
+    "price": 249499,
+    "status": "Under construction",
+    "url": "https://www.lennar.com/new-homes/texas/austin-central-texas/maxwell/cotton-gateway3/watermill-collection/sherman/41018511n08"
+  }
+]},
  {id:"palomino", name:"Palomino", city:"Manor", builder:"D.R. Horton",
   addr:"14825 B Afleet Alex St, Manor, TX 78653", lat:30.362, lng:-97.548,
   drive:"20–25 min", isd:"Manor ISD", specials:"austin",
@@ -546,9 +877,10 @@ function renderDetail(c){
       <div><div class="plan">${esc(/^Plan /.test(h.p)?h.p:h.p+" plan")}${h.status?" · "+esc(h.status):""}</div><h3>${esc(h.a)}</h3>
       <div class="spec num">${[h.bd+" bed", h.ba+" bath", h.sf.toLocaleString("en-US")+" sq ft", h.st?h.st+"-story":"", h.g?h.g+"-car garage":""].filter(Boolean).join(" · ")}</div></div>
       <div class="price num"><b>${h.from?"From ":""}${money(h.price)}</b>${h.was?`<span class="was">was ${money(h.was)}</span>`:""}</div>
+      ${h.url?`<p><a href="${esc(h.url)}" target="_blank" rel="noopener">View this home on Lennar</a> · Checked October 30, 2026</p>`:""}
       <dl class="rows num">
         ${h.est
-          ? `<dt>Sam's est. with a ~5% builder rate</dt><dd class="pmt">${money(h.pm)}</dd><dt>Sam's est. at today's rates (~7.1%)</dt><dd>${money(h.pmMkt)}</dd>`
+          ? `<dt>Sam's est. with a ~5% builder rate</dt><dd class="pmt">${money(h.pm)}</dd><dt>Sam's est. at a 7.1% rate</dt><dd>${money(h.pmMkt)}</dd>`
           : `<dt>Builder's est. payment</dt><dd class="pmt">${money(h.pm)}</dd>`}
         <dt>Down payment (3.5%)</dt><dd>${money(h.price*0.035)}</dd>
       </dl>
