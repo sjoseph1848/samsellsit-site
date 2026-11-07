@@ -35,3 +35,23 @@
   for = "/options/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Unlisted comps page. Directory index serves /aiuwhdfahe with no .html.
+# Not linked from the public site. Same noindex idea as /options/*.
+[[headers]]
+  for = "/aiuwhdfahe"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/aiuwhdfahe/"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/aiuwhdfahe/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "public, max-age=0, must-revalidate"
